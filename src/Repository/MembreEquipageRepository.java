@@ -5,6 +5,7 @@ import Enum.TypeMembreEquipage;
 import config.BDDConfig;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by Nico on 30/11/2016.
@@ -59,9 +60,46 @@ public class MembreEquipageRepository {
         }
     }
 
+    public ArrayList<MembreEquipage> findAllMembres(){
+        Statement stmt = null;
+        String query = "SELECT * FROM membre u";
+
+        try {
+
+            stmt = this.connexion.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<MembreEquipage> membreEquipages = new ArrayList<>();
+
+            while (rs.next()) {
+                membreEquipages.add(mapResultSet(rs));
+            }
+
+            if (!membreEquipages.isEmpty()){
+                return membreEquipages;
+            }
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public void delete(int id){
+        try {
+            String query = "delete from membre where id = ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.execute();
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public MembreEquipage mapResultSet(ResultSet rs){
         try {
-            long id = rs.getLong("id");
+            int id = rs.getInt("id");
             String nom = rs.getString("nom");
             String prenom = rs.getString("prenom");
             int type = rs.getInt("type");
@@ -78,4 +116,6 @@ public class MembreEquipageRepository {
         }
         return null;
     }
+
+
 }

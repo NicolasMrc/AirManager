@@ -8,12 +8,13 @@ import java.util.ArrayList;
  * Created by Nico on 28/11/2016.
  */
 public class MembreEquipage {
-    private Long id;
+    private int id;
     private String prenom;
     private String nom;
     private ArrayList<TypeAvion> typeAvion;
 
-    public MembreEquipage(Long id, String prenom, String nom) {
+    public MembreEquipage(int id, String nom, String prenom) {
+        this.id = id;
         this.prenom = prenom;
         this.nom = nom;
         this.typeAvion = new ArrayList<>();
@@ -63,7 +64,15 @@ public class MembreEquipage {
         return nom;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String toString(){
-        return "Nom : " + this.nom + " Prenom : " + this.prenom;
+        return "Id : " + this.id + " - Nom : " + this.nom + " - Prenom : " + this.prenom;
+    }
+
+    public String getMetier(){
+        return "";
     }
 }

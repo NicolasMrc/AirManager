@@ -1,16 +1,21 @@
 package GUI;
 
 import Entities.MembreEquipage;
+import Entities.Pilote;
 import Enum.TypeUtilisateur;
 import Entities.Utilisateur;
 import Services.MembreEquipageService;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Objects;
+
 import Enum.TypeMembreEquipage;
 
 /**
@@ -38,6 +43,10 @@ public class AdminFrame extends JFrame{
     private JPanel optionPanel;
     private JButton retourButton;
     private JButton deconnexionButton;
+    private JPanel supprimerMembreSection;
+    private JTable supprimerMembreTable;
+    private JScrollPane supprimerMembreScrollPanel;
+    private JButton supprimerMembreButton;
 
     private Utilisateur utilisateurCourrant;
 
@@ -64,7 +73,7 @@ public class AdminFrame extends JFrame{
 
         this.typeNouveauMembre.addItem("Pilote");
         this.typeNouveauMembre.addItem("Copilote");
-        this.typeNouveauMembre.addItem("Personel non Commercial");
+        this.typeNouveauMembre.addItem("Personnel non Commercial");
 
          addPanelMouseListener(supprimerMembrePanel, "supprimerMembre");
          addPanelMouseListener(SupprimerVolPanel, "supprimerVol");
@@ -78,38 +87,9 @@ public class AdminFrame extends JFrame{
 
 
         this.ajoutMembreSection.setVisible(false);
+        this.supprimerMembreSection.setVisible(false);
 
-        retourButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ajoutMembreSection.setVisible(false);
-                buttonPanel.setVisible(true);
-                setSize(new Dimension(700, 800));
-                retourButton.setVisible(false);
-            }
-        });
-
-        deconnexionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LoginGUI login = new LoginGUI();
-                dispose();
-            }
-        });
-        ajouterMembreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String type = String.valueOf(typeNouveauMembre.getSelectedItem());
-                MembreEquipage membreEquipage;
-                if(type.equals("Pilote")){
-                    membreEquipageService.addMembreEquipage(nomNouveauMembre.getText(), prenomNouveauMembre.getText(), TypeMembreEquipage.PILOTE);
-                } else if (type.equals("Copilote")){
-                    membreEquipageService.addMembreEquipage(nomNouveauMembre.getText(), prenomNouveauMembre.getText(), TypeMembreEquipage.COPILOTE);
-                } else {
-                    membreEquipageService.addMembreEquipage(nomNouveauMembre.getText(), prenomNouveauMembre.getText(), TypeMembreEquipage.PNC);
-                }
-            }
-        });
+        this.addButtonActionListener();
     }
 
     public void addPanelMouseListener(JPanel panel, String action){
@@ -152,7 +132,28 @@ public class AdminFrame extends JFrame{
         switch (section){
             case "supprimerMembre" :
                 this.titreLabel.setText("Supprimer un membre d'équipage");
+                this.supprimerMembreSection.setVisible(true);
+                this.setPreferredSize(new Dimension(700, 400));
+                ArrayList<MembreEquipage> membres = this.membreEquipageService.getMembres();
+
+                DefaultTableModel model = new DefaultTableModel();
+
+                model.addColumn("Id");
+                model.addColumn("Nom");
+                model.addColumn("Prenom");
+                model.addColumn("Metier");
+
+                for(MembreEquipage membreEquipage : membres){
+                    Object[] objs = {membreEquipage.getId(), membreEquipage.getNom(), membreEquipage.getPrenom(), membreEquipage.getMetier()};
+                    model.addRow(objs);
+                }
+
+                this.supprimerMembreTable = new JTable(model);
+                this.supprimerMembreScrollPanel.setLayout(new ScrollPaneLayout());
+                this.supprimerMembreScrollPanel.getViewport ().add (this.supprimerMembreTable);
+                this.pack();
                 break;
+
             case "supprimerVol" :
                 this.titreLabel.setText("Supprimer un vol");
                 break;
@@ -183,9 +184,74 @@ public class AdminFrame extends JFrame{
         }
     }
 
+
+    public void addButtonActionListener(){
+        retourButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ajoutMembreSection.setVisible(false);
+                supprimerMembreSection.setVisible(false);
+                buttonPanel.setVisible(true);
+                setSize(new Dimension(700, 800));
+                retourButton.setVisible(false);
+            }
+        });
+
+        deconnexionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginGUI login = new LoginGUI();
+                dispose();
+            }
+        });
+        ajouterMembreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String type = String.valueOf(typeNouveauMembre.getSelectedItem());
+                MembreEquipage membreEquipage;
+                String nom = nomNouveauMembre.getText();
+                String prenom = prenomNouveauMembre.getText();
+                if(!nom.isEmpty() && !prenom.isEmpty()){
+                    switch (type) {
+                        case "Pilote" :
+                            membreEquipageService.addMembreEquipage(nom, prenom, TypeMembreEquipage.PILOTE);
+                            break;
+                        case "Copilote" :
+                            membreEquipageService.addMembreEquipage(nom, prenom, TypeMembreEquipage.COPILOTE);
+                            break;
+                        case "Personnel non Commercial" :
+                            membreEquipageService.addMembreEquipage(nom, prenom, TypeMembreEquipage.PNC);
+                            break;
+                    }
+                    ajoutMembreSection.setVisible(false);
+                    buttonPanel.setVisible(true);
+                    setSize(new Dimension(700, 800));
+                    retourButton.setVisible(false);
+                    prenomNouveauMembre.setText("");
+                    nomNouveauMembre.setText("");
+                } else {
+                    JPanel panel = new JPanel();
+                    JOptionPane.showMessageDialog(panel, "Le nom et le prenom doivent être rensigné", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        supprimerMembreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = supprimerMembreTable.getSelectedRow();
+                Object id = (supprimerMembreTable.getValueAt(selectedRow, 0));
+                if(id != null){
+                    membreEquipageService.delete((int)id);
+                    ((DefaultTableModel)supprimerMembreTable.getModel()).removeRow(selectedRow);
+                }
+            }
+        });
+    }
+
     //TODO Supprimer une fois que tout marchera
     public static void main(String[] args){
         Utilisateur user = new Utilisateur(1L, "admin", "admin", TypeUtilisateur.ADMIN);
         AdminFrame adminFrame = new AdminFrame(user);
     }
+
 }
