@@ -60,7 +60,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <icon value="GUI/admin.png"/>
+                  <icon value="GUI/images/admin.png"/>
                   <text value=""/>
                 </properties>
               </component>

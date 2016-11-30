@@ -6,6 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import Entities.MembreEquipage;
+import Entities.TypeUtilisateur;
+import Entities.Utilisateur;
+import Services.UtilisateurService;
+import com.mysql.jdbc.*;
 
 /**
  * Created by Nico on 28/11/2016.
@@ -24,15 +33,17 @@ public class LoginGUI extends JFrame{
     private JPasswordField passwordField;
     private JButton seConnecterButton;
     private JButton retourButton;
-    private String roleUtilisateur;
+    private TypeUtilisateur typeUtilisateur;
+
+
+    private UtilisateurService utilisateurService;
 
     public LoginGUI(){
+        this.utilisateurService = new UtilisateurService();
 
-        addPanelMouseListener(this.adminPanel, "admin");
-        addPanelMouseListener(this.managerPanel, "manager");
-        addPanelMouseListener(this.membrePanel, "membre");
-
-
+        addPanelMouseListener(this.adminPanel, TypeUtilisateur.ADMIN);
+        addPanelMouseListener(this.managerPanel, TypeUtilisateur.MANAGER);
+        addPanelMouseListener(this.membrePanel, TypeUtilisateur.MEMBRE_EQUIPAGE);
 
         this.setSize(new Dimension(510, 260));
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -51,7 +62,9 @@ public class LoginGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 rolePanel.setVisible(true);
                 credentialPanel.setVisible(false);
-                roleUtilisateur = "";
+                passwordField.setText("");
+                usernameField.setText("");
+                typeUtilisateur = null;
             }
         });
 
@@ -60,11 +73,28 @@ public class LoginGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = String.valueOf(passwordField.getPassword());
+
+                Utilisateur user = utilisateurService.connexion(username, password, typeUtilisateur);
+
+                if (user != null){
+                    if(user.getTypeUtilisateur().equals(TypeUtilisateur.ADMIN)){
+                        AdminFrame adminFrame = new AdminFrame(user);
+                    } else if (user.getTypeUtilisateur().equals(TypeUtilisateur.MANAGER)){
+                        //ManagerFrame managerFrame = new ManagerFrame();
+                    } else if (user.getTypeUtilisateur().equals(TypeUtilisateur.MEMBRE_EQUIPAGE)){
+                        //MembreEquipageFrame membreEquipageFrame = new MembreEquipageFrame();
+                    }
+                    setVisible(false);
+                    dispose();
+                } else {
+                    Panel panel = new Panel();
+                    JOptionPane.showMessageDialog(panel, "Nom d'utilisateur ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
 
-    public void addPanelMouseListener(JPanel panel, String role){
+    public void addPanelMouseListener(JPanel panel, TypeUtilisateur type){
 
         panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -78,7 +108,7 @@ public class LoginGUI extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 rolePanel.setVisible(false);
                 credentialPanel.setVisible(true);
-                roleUtilisateur = role;
+                typeUtilisateur = type;
                 repaint();
                 super.mouseReleased(e);
             }
