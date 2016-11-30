@@ -10,6 +10,10 @@ import Repository.UtilisateurRepository;
  */
 public class UtilisateurService {
 
+    public UtilisateurService(){
+
+    }
+
     /**
      * Repository d'utilisateur
      */

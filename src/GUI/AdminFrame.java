@@ -5,6 +5,8 @@ import Entities.Utilisateur;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -23,6 +25,16 @@ public class AdminFrame extends JFrame{
     private JPanel QualifierMembrePanel;
     private JPanel CreerTypeAvionPanel;
     private JPanel SupprimerAvionPanel;
+    private JPanel titrePanel;
+    private JLabel titreLabel;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JComboBox comboBox1;
+    private JPanel ajoutMembreSection;
+    private JButton ajouterMembreButton;
+    private JPanel optionPanel;
+    private JButton retourButton;
+    private JButton deconnexionButton;
 
     private Utilisateur utilisateurCourrant;
 
@@ -36,21 +48,48 @@ public class AdminFrame extends JFrame{
         this.setContentPane(this.mainPanel);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.deconnexionButton.setOpaque(true);
+        this.deconnexionButton.setFocusPainted(false);
+        this.deconnexionButton.setBorderPainted(false);
+        this.retourButton.setOpaque(true);
+        this.retourButton.setFocusPainted(false);
+        this.retourButton.setBorderPainted(false);
+        this.retourButton.setVisible(false);
         //this.setResizable(false);
 
-         addPanelMouseListener(supprimerMembrePanel);
-         addPanelMouseListener(SupprimerVolPanel);
-         addPanelMouseListener(AjouterMembrePanel);
-         addPanelMouseListener(CreerVolPanel);
-         addPanelMouseListener(SupprimerTypeAvionPanel);
-         addPanelMouseListener(CreerAvionPanel);
-         addPanelMouseListener(QualifierMembrePanel);
-         addPanelMouseListener(CreerTypeAvionPanel);
-         addPanelMouseListener(SupprimerAvionPanel);
+         addPanelMouseListener(supprimerMembrePanel, "supprimerMembre");
+         addPanelMouseListener(SupprimerVolPanel, "supprimerVol");
+         addPanelMouseListener(AjouterMembrePanel, "ajouterMembre");
+         addPanelMouseListener(CreerVolPanel, "ajouterVol");
+         addPanelMouseListener(SupprimerTypeAvionPanel, "supprimerTypeAvion");
+         addPanelMouseListener(CreerAvionPanel, "ajouterAvion");
+         addPanelMouseListener(QualifierMembrePanel, "qualifierMembre");
+         addPanelMouseListener(CreerTypeAvionPanel, "ajouterTypeAvion");
+         addPanelMouseListener(SupprimerAvionPanel, "supprimerAvion");
 
+
+        this.ajoutMembreSection.setVisible(false);
+
+        retourButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ajoutMembreSection.setVisible(false);
+                buttonPanel.setVisible(true);
+                setSize(new Dimension(700, 800));
+                retourButton.setVisible(false);
+            }
+        });
+
+        deconnexionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginGUI login = new LoginGUI();
+                dispose();
+            }
+        });
     }
 
-    public void addPanelMouseListener(JPanel panel){
+    public void addPanelMouseListener(JPanel panel, String action){
 
         panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -64,6 +103,7 @@ public class AdminFrame extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 panel.setBackground(new Color(51, 71, 105));
                 repaint();
+                goToSection(action);
                 super.mouseReleased(e);
             }
 
@@ -81,6 +121,43 @@ public class AdminFrame extends JFrame{
                 super.mouseExited(e);
             }
         });
+    }
+
+    public void goToSection(String section){
+        this.buttonPanel.setVisible(false);
+        this.retourButton.setVisible(true);
+        switch (section){
+            case "supprimerMembre" :
+                this.titreLabel.setText("Supprimer un membre d'équipage");
+                break;
+            case "supprimerVol" :
+                this.titreLabel.setText("Supprimer un vol");
+                break;
+            case "ajouterMembre" :
+                this.titreLabel.setText("Ajouter un membre d'équipage");
+                this.ajoutMembreSection.setVisible(true);
+                this.setPreferredSize(new Dimension(700, 400));
+                this.pack();
+                break;
+            case "ajouterVol" :
+                this.titreLabel.setText("Ajouter un vol");
+                break;
+            case "supprimerTypeAvion" :
+                this.titreLabel.setText("Supprimer un type d'avion");
+                break;
+            case "ajouterAvion" :
+                this.titreLabel.setText("Ajouter un avion");
+                break;
+            case "qualifierMembre" :
+                this.titreLabel.setText("Qualifier un membre d'équipage");
+                break;
+            case "ajouterTypeAvion" :
+                this.titreLabel.setText("Ajouter un type d'avion");
+                break;
+            case "supprimerAvion" :
+                this.titreLabel.setText("Supprimer un avion");
+                break;
+        }
     }
 
     //TODO Supprimer une fois que tout marchera

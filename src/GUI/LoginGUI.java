@@ -36,10 +36,9 @@ public class LoginGUI extends JFrame{
     private TypeUtilisateur typeUtilisateur;
 
 
-    private UtilisateurService utilisateurService;
+    private UtilisateurService utilisateurService = new UtilisateurService();
 
     public LoginGUI(){
-        this.utilisateurService = new UtilisateurService();
 
         addPanelMouseListener(this.adminPanel, TypeUtilisateur.ADMIN);
         addPanelMouseListener(this.managerPanel, TypeUtilisateur.MANAGER);
@@ -55,6 +54,7 @@ public class LoginGUI extends JFrame{
         this.setResizable(false);
 
         this.credentialPanel.setVisible(false);
+
 
 
         retourButton.addActionListener(new ActionListener() {
