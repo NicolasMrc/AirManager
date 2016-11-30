@@ -1,4 +1,4 @@
-package Entities;
+package Enum;
 
 /**
  * Created by Nico on 29/11/2016.

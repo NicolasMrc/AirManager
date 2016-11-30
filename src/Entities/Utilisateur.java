@@ -1,5 +1,7 @@
 package Entities;
 
+import Enum.TypeUtilisateur;
+
 /**
  * Created by Nico on 29/11/2016.
  */

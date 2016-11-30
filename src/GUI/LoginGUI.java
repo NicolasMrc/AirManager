@@ -6,15 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
-import Entities.MembreEquipage;
-import Entities.TypeUtilisateur;
+import Enum.TypeUtilisateur;
 import Entities.Utilisateur;
 import Services.UtilisateurService;
-import com.mysql.jdbc.*;
 
 /**
  * Created by Nico on 28/11/2016.

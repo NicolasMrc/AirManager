@@ -1,6 +1,6 @@
 package Services;
 
-import Entities.TypeUtilisateur;
+import Enum.TypeUtilisateur;
 import Entities.Utilisateur;
 import Repository.UtilisateurRepository;
 
@@ -9,10 +9,6 @@ import Repository.UtilisateurRepository;
  * Created by Nico on 29/11/2016.
  */
 public class UtilisateurService {
-
-    public UtilisateurService(){
-
-    }
 
     /**
      * Repository d'utilisateur

@@ -8,11 +8,12 @@ import java.util.ArrayList;
  * Created by Nico on 28/11/2016.
  */
 public class MembreEquipage {
+    private Long id;
     private String prenom;
     private String nom;
     private ArrayList<TypeAvion> typeAvion;
 
-    public MembreEquipage(String prenom, String nom) {
+    public MembreEquipage(Long id, String prenom, String nom) {
         this.prenom = prenom;
         this.nom = nom;
         this.typeAvion = new ArrayList<>();
@@ -60,5 +61,9 @@ public class MembreEquipage {
 
     public String getNom() {
         return nom;
+    }
+
+    public String toString(){
+        return "Nom : " + this.nom + " Prenom : " + this.prenom;
     }
 }

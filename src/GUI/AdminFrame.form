@@ -375,7 +375,7 @@
               <text value="Nom"/>
             </properties>
           </component>
-          <component id="52cd1" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="52cd1" class="javax.swing.JTextField" binding="nomNouveauMembre">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="120" height="-1"/>
@@ -392,7 +392,7 @@
               <text value="Prenom"/>
             </properties>
           </component>
-          <component id="b774a" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="b774a" class="javax.swing.JTextField" binding="prenomNouveauMembre">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="120" height="-1"/>
@@ -409,7 +409,7 @@
               <text value="Métier"/>
             </properties>
           </component>
-          <component id="87321" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="87321" class="javax.swing.JComboBox" binding="typeNouveauMembre">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>

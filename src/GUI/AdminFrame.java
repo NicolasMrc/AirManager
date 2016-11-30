@@ -1,7 +1,9 @@
 package GUI;
 
-import Entities.TypeUtilisateur;
+import Entities.MembreEquipage;
+import Enum.TypeUtilisateur;
 import Entities.Utilisateur;
+import Services.MembreEquipageService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import Enum.TypeMembreEquipage;
 
 /**
  * Created by Nico on 29/11/2016.
@@ -27,9 +30,9 @@ public class AdminFrame extends JFrame{
     private JPanel SupprimerAvionPanel;
     private JPanel titrePanel;
     private JLabel titreLabel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JComboBox comboBox1;
+    private JTextField nomNouveauMembre;
+    private JTextField prenomNouveauMembre;
+    private JComboBox typeNouveauMembre;
     private JPanel ajoutMembreSection;
     private JButton ajouterMembreButton;
     private JPanel optionPanel;
@@ -37,6 +40,8 @@ public class AdminFrame extends JFrame{
     private JButton deconnexionButton;
 
     private Utilisateur utilisateurCourrant;
+
+    private MembreEquipageService membreEquipageService = new MembreEquipageService();
 
     public AdminFrame(Utilisateur utilisateur) throws HeadlessException {
 
@@ -56,6 +61,10 @@ public class AdminFrame extends JFrame{
         this.retourButton.setBorderPainted(false);
         this.retourButton.setVisible(false);
         //this.setResizable(false);
+
+        this.typeNouveauMembre.addItem("Pilote");
+        this.typeNouveauMembre.addItem("Copilote");
+        this.typeNouveauMembre.addItem("Personel non Commercial");
 
          addPanelMouseListener(supprimerMembrePanel, "supprimerMembre");
          addPanelMouseListener(SupprimerVolPanel, "supprimerVol");
@@ -85,6 +94,20 @@ public class AdminFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 LoginGUI login = new LoginGUI();
                 dispose();
+            }
+        });
+        ajouterMembreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String type = String.valueOf(typeNouveauMembre.getSelectedItem());
+                MembreEquipage membreEquipage;
+                if(type.equals("Pilote")){
+                    membreEquipageService.addMembreEquipage(nomNouveauMembre.getText(), prenomNouveauMembre.getText(), TypeMembreEquipage.PILOTE);
+                } else if (type.equals("Copilote")){
+                    membreEquipageService.addMembreEquipage(nomNouveauMembre.getText(), prenomNouveauMembre.getText(), TypeMembreEquipage.COPILOTE);
+                } else {
+                    membreEquipageService.addMembreEquipage(nomNouveauMembre.getText(), prenomNouveauMembre.getText(), TypeMembreEquipage.PNC);
+                }
             }
         });
     }

@@ -1,7 +1,8 @@
 package Repository;
 
-import Entities.TypeUtilisateur;
+import Enum.TypeUtilisateur;
 import Entities.Utilisateur;
+import config.BDDConfig;
 
 import java.sql.*;
 
@@ -9,13 +10,17 @@ import java.sql.*;
  * Created by Nico on 29/11/2016.
  */
 public class UtilisateurRepository {
-    String url = "jdbc:mysql://localhost:8889/airmanager";
-    String utilisateur = "root";
-    String motDePasse = "root";
-    Connection connexion = null;
+    private String url;
+    private String utilisateur;
+    private String motDePasse;
+    private Connection connexion = null;
 
     public UtilisateurRepository(){
         try {
+            BDDConfig config = new BDDConfig();
+            this.url = config.getUrl();
+            this.utilisateur = config.getUtilisateur();
+            this.motDePasse = config.getMotDePasse();
             connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
             System.out.println("successfully connected");
         } catch ( SQLException ex ) {
@@ -48,8 +53,7 @@ public class UtilisateurRepository {
                     type = TypeUtilisateur.MEMBRE_EQUIPAGE;
                 }
 
-                Utilisateur utilisateur = new Utilisateur(id, usernameFromBdd, passwordFromBdd, type);
-                return utilisateur;
+                return new Utilisateur(id, usernameFromBdd, passwordFromBdd, type);
 
             }
         } catch (SQLException e ) {
