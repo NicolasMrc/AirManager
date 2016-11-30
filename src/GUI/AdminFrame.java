@@ -239,11 +239,15 @@ public class AdminFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = supprimerMembreTable.getSelectedRow();
-                Object id = (supprimerMembreTable.getValueAt(selectedRow, 0));
-                if(id != null){
+                try{
+                    Object id = (supprimerMembreTable.getValueAt(selectedRow, 0));
                     membreEquipageService.delete((int)id);
                     ((DefaultTableModel)supprimerMembreTable.getModel()).removeRow(selectedRow);
+                } catch (ArrayIndexOutOfBoundsException ex){
+                    JPanel panel = new JPanel();
+                    JOptionPane.showMessageDialog(panel, "Vous devez selectionner un membre à supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
         });
     }
