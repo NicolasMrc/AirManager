@@ -293,6 +293,7 @@ public class AdminFrame extends JFrame{
                     retourButton.setVisible(false);
                     prenomNouveauMembre.setText("");
                     nomNouveauMembre.setText("");
+                    titreLabel.setText("Administration");
                 } else {
                     JPanel panel = new JPanel();
                     JOptionPane.showMessageDialog(panel, "Le nom et le prenom doivent être rensigné", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -329,6 +330,7 @@ public class AdminFrame extends JFrame{
                     nomTypeAvion.setText("");
                     nbPNCMax.setText("");
                     nbPNCMin.setText("");
+                    titreLabel.setText("Administration");
                 } catch (EmptyFieldException ex){
                     JPanel panel = new JPanel();
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -350,6 +352,7 @@ public class AdminFrame extends JFrame{
                     setSize(new Dimension(700, 800));
                     retourButton.setVisible(false);
                     referenceAvion.setText("");
+                    titreLabel.setText("Administration");
                 } catch (Exception ex){
                     JPanel panel = new JPanel();
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
