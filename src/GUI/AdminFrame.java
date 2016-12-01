@@ -1,9 +1,11 @@
 package GUI;
 
 import Entities.MembreEquipage;
-import Entities.Pilote;
+import Entities.TypeAvion;
 import Enum.TypeUtilisateur;
 import Entities.Utilisateur;
+import Exceptions.EmptyFieldException;
+import Services.AvionService;
 import Services.MembreEquipageService;
 
 import javax.swing.*;
@@ -14,9 +16,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import Enum.TypeMembreEquipage;
+import Services.TypeAvionService;
 
 /**
  * Created by Nico on 29/11/2016.
@@ -43,15 +45,46 @@ public class AdminFrame extends JFrame{
     private JPanel optionPanel;
     private JButton retourButton;
     private JButton deconnexionButton;
-    private JPanel supprimerMembreSection;
+    private JPanel suppressionMembreSection;
     private JTable supprimerMembreTable;
     private JScrollPane supprimerMembreScrollPanel;
     private JButton supprimerMembreButton;
+    private JPanel ajoutTypeAvionSection;
+    private JTextField nomTypeAvion;
+    private JTextField nbPNCMin;
+    private JTextField nbPNCMax;
+    private JButton ajouterTypeAvionButton;
+    private JPanel ajoutAvionSection;
+    private JTextField referenceAvion;
+    private JButton ajouterAvionButton;
+    private JComboBox typeAvionCombo;
 
+    /**
+     * L'utilisateur courrant
+     */
     private Utilisateur utilisateurCourrant;
 
+    /**
+     * Service de la classe MembreEquipage
+     */
     private MembreEquipageService membreEquipageService = new MembreEquipageService();
 
+    /**
+     * Service de la classe avion
+     */
+    private AvionService avionService = new AvionService();
+
+    /**
+     * Service de la class typeAvion
+     */
+    private TypeAvionService typeAvionService = new TypeAvionService();
+
+    /**
+     * constructeur du tableau d'administration
+     * @param utilisateur
+     *      l'utilisateur courant
+     * @throws HeadlessException
+     */
     public AdminFrame(Utilisateur utilisateur) throws HeadlessException {
 
         this.setSize(new Dimension(700, 800));
@@ -71,6 +104,7 @@ public class AdminFrame extends JFrame{
         this.retourButton.setVisible(false);
         //this.setResizable(false);
 
+        //TODO utiliser la classe custom comboItem !
         this.typeNouveauMembre.addItem("Pilote");
         this.typeNouveauMembre.addItem("Copilote");
         this.typeNouveauMembre.addItem("Personnel non Commercial");
@@ -85,13 +119,21 @@ public class AdminFrame extends JFrame{
          addPanelMouseListener(CreerTypeAvionPanel, "ajouterTypeAvion");
          addPanelMouseListener(SupprimerAvionPanel, "supprimerAvion");
 
-
         this.ajoutMembreSection.setVisible(false);
-        this.supprimerMembreSection.setVisible(false);
+        this.suppressionMembreSection.setVisible(false);
+        this.ajoutAvionSection.setVisible(false);
+        this.ajoutTypeAvionSection.setVisible(false);
 
         this.addButtonActionListener();
     }
 
+    /**
+     * permet d'ajouter a un panel un mouse listener pour reconnaitre les interraction avec l'utilisateur
+     * @param panel
+     *      le panel pour lequel il faut ajouter un mouseListener
+     * @param action
+     *      l'action a ajouter au click sur le panel
+     */
     public void addPanelMouseListener(JPanel panel, String action){
 
         panel.addMouseListener(new MouseAdapter() {
@@ -126,13 +168,18 @@ public class AdminFrame extends JFrame{
         });
     }
 
+    /**
+     * permet la navigation entre les section
+     * @param section
+     *      la section a afficher
+     */
     public void goToSection(String section){
         this.buttonPanel.setVisible(false);
         this.retourButton.setVisible(true);
         switch (section){
             case "supprimerMembre" :
                 this.titreLabel.setText("Supprimer un membre d'équipage");
-                this.supprimerMembreSection.setVisible(true);
+                this.suppressionMembreSection.setVisible(true);
                 this.setPreferredSize(new Dimension(700, 400));
                 ArrayList<MembreEquipage> membres = this.membreEquipageService.getMembres();
 
@@ -171,12 +218,23 @@ public class AdminFrame extends JFrame{
                 break;
             case "ajouterAvion" :
                 this.titreLabel.setText("Ajouter un avion");
+
+                for(TypeAvion typeAvion : typeAvionService.findAll()){
+                    this.typeAvionCombo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
+                }
+
+                this.ajoutAvionSection.setVisible(true);
+                this.setPreferredSize(new Dimension(700, 280));
+                this.pack();
                 break;
             case "qualifierMembre" :
                 this.titreLabel.setText("Qualifier un membre d'équipage");
                 break;
             case "ajouterTypeAvion" :
                 this.titreLabel.setText("Ajouter un type d'avion");
+                this.ajoutTypeAvionSection.setVisible(true);
+                this.setPreferredSize(new Dimension(700, 280));
+                this.pack();
                 break;
             case "supprimerAvion" :
                 this.titreLabel.setText("Supprimer un avion");
@@ -185,15 +243,21 @@ public class AdminFrame extends JFrame{
     }
 
 
+    /**
+     * permet d'ajouter les action Listener sur les boutons
+     */
     public void addButtonActionListener(){
         retourButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ajoutMembreSection.setVisible(false);
-                supprimerMembreSection.setVisible(false);
+                suppressionMembreSection.setVisible(false);
+                ajoutAvionSection.setVisible(false);
+                ajoutTypeAvionSection.setVisible(false);
                 buttonPanel.setVisible(true);
                 setSize(new Dimension(700, 800));
                 retourButton.setVisible(false);
+                titreLabel.setText("Administration");
             }
         });
 
@@ -250,9 +314,54 @@ public class AdminFrame extends JFrame{
 
             }
         });
+
+
+        ajouterTypeAvionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    typeAvionService.addTypeAvion(nomTypeAvion.getText(), Integer.valueOf(nbPNCMin.getText()), Integer.valueOf(nbPNCMax.getText()));
+
+                    ajoutTypeAvionSection.setVisible(false);
+                    buttonPanel.setVisible(true);
+                    setSize(new Dimension(700, 800));
+                    retourButton.setVisible(false);
+                    nomTypeAvion.setText("");
+                    nbPNCMax.setText("");
+                    nbPNCMin.setText("");
+                } catch (EmptyFieldException ex){
+                    JPanel panel = new JPanel();
+                    JOptionPane.showMessageDialog(panel, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        ajouterAvionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Object item = typeAvionCombo.getSelectedItem();
+                    int id = Integer.valueOf(((ComboItem)item).getValue());
+
+                    avionService.addAvion(typeAvionService.findOneById(id), referenceAvion.getText());
+
+                    ajoutAvionSection.setVisible(false);
+                    buttonPanel.setVisible(true);
+                    setSize(new Dimension(700, 800));
+                    retourButton.setVisible(false);
+                    referenceAvion.setText("");
+                } catch (Exception ex){
+                    JPanel panel = new JPanel();
+                    JOptionPane.showMessageDialog(panel, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
-    //TODO Supprimer une fois que tout marchera
+    /**
+     * Main permettant de lancer directement le tableau d'administration sans avoir à s'authentifier
+     * @param args
+     */
     public static void main(String[] args){
         Utilisateur user = new Utilisateur(1L, "admin", "admin", TypeUtilisateur.ADMIN);
         AdminFrame adminFrame = new AdminFrame(user);

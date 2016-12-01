@@ -15,7 +15,7 @@ public class MembreEquipageService {
 
     public void addMembreEquipage(String nom, String prenom, TypeMembreEquipage typeMembreEquipage){
         if(!prenom.isEmpty() && !nom.isEmpty() && typeMembreEquipage != null ){
-            this.membreEquipageRepository.addMembre(nom, prenom, typeMembreEquipage);
+            this.membreEquipageRepository.save(nom, prenom, typeMembreEquipage);
         }
     }
 

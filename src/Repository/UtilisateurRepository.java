@@ -7,14 +7,34 @@ import config.BDDConfig;
 import java.sql.*;
 
 /**
+ * Repository de la classe Utilisateur
  * Created by Nico on 29/11/2016.
  */
 public class UtilisateurRepository {
+
+    /**
+     * L'url de la bdd
+     */
     private String url;
+
+    /**
+     * l'utilisateur de la bdd
+     */
     private String utilisateur;
+
+    /**
+     * le mot de passe de la bdd
+     */
     private String motDePasse;
+
+    /**
+     * la connexion a la bddd
+     */
     private Connection connexion = null;
 
+    /**
+     * constructeur vide initialisant la connexion avec la bdd
+     */
     public UtilisateurRepository(){
         try {
             BDDConfig config = new BDDConfig();
@@ -22,12 +42,20 @@ public class UtilisateurRepository {
             this.utilisateur = config.getUtilisateur();
             this.motDePasse = config.getMotDePasse();
             connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
-            System.out.println("successfully connected");
         } catch ( SQLException ex ) {
             System.out.println(ex.getMessage());
         }
     }
 
+    /**
+     * permet a l'utilisateur de se connecter
+     * @param username
+     *      le nom d'utilisateur
+     * @param password
+     *      le mot de passe
+     * @return
+     *      l'utilisateur
+     */
     public Utilisateur connexion(String username, String password){
         Statement stmt = null;
         String query = "SELECT * FROM utilisateur u WHERE u.username = '" + username + "'";

@@ -8,14 +8,34 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
+ * Repository de la classe membreEquipage
  * Created by Nico on 30/11/2016.
  */
 public class MembreEquipageRepository {
+
+    /**
+     * L'url de la bdd
+     */
     private String url;
+
+    /**
+     * l'utilisateur de la bdd
+     */
     private String utilisateur;
+
+    /**
+     * le mot de passe de la bdd
+     */
     private String motDePasse;
+
+    /**
+     * la connexion a la bddd
+     */
     private Connection connexion = null;
 
+    /**
+     * constructeur vide initialisant la connexion avec la bdd
+     */
     public MembreEquipageRepository(){
         try {
             BDDConfig config = new BDDConfig();
@@ -23,13 +43,21 @@ public class MembreEquipageRepository {
             this.utilisateur = config.getUtilisateur();
             this.motDePasse = config.getMotDePasse();
             connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
-            System.out.println("successfully connected");
         } catch ( SQLException ex ) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void addMembre(String nom, String prenom, TypeMembreEquipage typeMembreEquipage){
+    /**
+     * permet de sauvegarder un membre en base
+     * @param nom
+     *      le nom du membre d'equipage
+     * @param prenom
+     *      le prenom du membre d'equipage
+     * @param typeMembreEquipage
+     *      le type du membre d'équipage
+     */
+    public void save(String nom, String prenom, TypeMembreEquipage typeMembreEquipage){
 
         int type;
         if (typeMembreEquipage.equals(TypeMembreEquipage.PILOTE)){
@@ -60,6 +88,11 @@ public class MembreEquipageRepository {
         }
     }
 
+    /**
+     * permet de retourner tout les membre d'equipage inscrits en base
+     * @return
+     *      la liste des membre d'equipage
+     */
     public ArrayList<MembreEquipage> findAllMembres(){
         Statement stmt = null;
         String query = "SELECT * FROM membre u";
@@ -85,6 +118,11 @@ public class MembreEquipageRepository {
         return null;
     }
 
+    /**
+     * permet de supprimer un membre
+     * @param id
+     *      l'id du membre que l'on souhaite supprimer
+     */
     public void delete(int id){
         try {
             String query = "delete from membre where id = ?";
@@ -97,6 +135,13 @@ public class MembreEquipageRepository {
         }
     }
 
+    /**
+     * permet de creer un Membre d'equipage a partir du resultset
+     * @param rs
+     *      le resultset
+     * @return
+     *      un membreEquipage
+     */
     public MembreEquipage mapResultSet(ResultSet rs){
         try {
             int id = rs.getInt("id");
@@ -116,6 +161,4 @@ public class MembreEquipageRepository {
         }
         return null;
     }
-
-
 }
