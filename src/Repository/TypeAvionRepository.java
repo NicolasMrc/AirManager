@@ -3,6 +3,7 @@ package Repository;
 import Entities.TypeAvion;
 import config.BDDConfig;
 
+import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -49,28 +50,26 @@ public class TypeAvionRepository {
 
     /**
      * permet de sauvegarder un Type d'avion en base
-     * @param nom
-     *      le nom du type d'avion
-     * @param nbPNCMin
-     *      le nombre de personnel non commercial minimal du type d'avion
-     * @param nbPNCMax
-     *      le nombre de personnel non commercial maximal du type d'avion
+     * @param typeAvion
+     *      le TypeAvion a sauvegarder
      */
-    public void save(String nom, int nbPNCMin, int nbPNCMax){
+    public TypeAvion save(TypeAvion typeAvion){
 
         String query = "insert into type_avion (nom, nbPNCMin, nbPNCMax) values (?, ?, ?)";
 
         try {
-            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
-            preparedStmt.setString (1, nom);
-            preparedStmt.setInt    (2, nbPNCMin);
-            preparedStmt.setInt    (3, nbPNCMax);
 
-            preparedStmt.execute();
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setString (1, typeAvion.getNom());
+            preparedStmt.setInt    (2, typeAvion.getNbPNCmin());
+            preparedStmt.setInt    (3, typeAvion.getNbPNCmax());
+
+            preparedStmt.executeUpdate();
 
         } catch (SQLException e ) {
             System.out.println(e.getMessage());
         }
+        return null;
     }
 
     /**
@@ -127,6 +126,23 @@ public class TypeAvionRepository {
     }
 
     /**
+     * permet de supprimer un type avion
+     * @param id
+     *      l'id du type avion que l'on souhaite supprimer
+     */
+    public void delete(int id){
+        try {
+            String query = "delete from type_avion where id = ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.execute();
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
      * permet de mapper le resultset avec la classe TypeAvion
      * @param rs
      *      le resultset
@@ -146,5 +162,7 @@ public class TypeAvionRepository {
         }
         return null;
     }
+
+
 
 }

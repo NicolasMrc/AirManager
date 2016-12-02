@@ -29,9 +29,9 @@ public class TypeAvionService {
      * @throws EmptyFieldException
      *      Si un des champs est vide
      */
-    public void addTypeAvion(String nom, Integer nbPNCMin, Integer nbPNCMax) throws EmptyFieldException{
+    public TypeAvion addTypeAvion(String nom, Integer nbPNCMin, Integer nbPNCMax) throws EmptyFieldException{
         if(!nom.isEmpty() && nbPNCMax != null && nbPNCMin != null) {
-            this.typeAvionRepository.save(nom, nbPNCMin, nbPNCMax);
+            return this.typeAvionRepository.save(new TypeAvion(nom, nbPNCMin, nbPNCMax));
         } else {
             throw new EmptyFieldException();
         }
@@ -68,5 +68,16 @@ public class TypeAvionService {
      */
     public ArrayList<TypeAvion> findAll(){
         return this.typeAvionRepository.findAll();
+    }
+
+    /**
+     * permet de supprimer un type d'avion a partir d'un id
+     * @param id
+     *      l'id du type avion a supprimer
+     */
+    public void delete(int id){
+        if(id != -1){
+            this.typeAvionRepository.delete(id);
+        }
     }
 }

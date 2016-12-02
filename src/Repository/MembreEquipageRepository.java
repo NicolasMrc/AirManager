@@ -68,13 +68,8 @@ public class MembreEquipageRepository {
             type = 2;
         }
 
-        //Statement stmt = null;
-        // the mysql insert statement
-        String query = " insert into membre (nom, prenom, type) values (?, ?, ?)";
+        String query = "insert into membre (nom, prenom, type) values (?, ?, ?)";
 
-        // create the mysql insert preparedstatement
-
-        //String query = "INSERT INTO membre m (nom, prenom, type) VALUES ('" + nom + "','" + prenom + "','" + type + "')";
         try {
             PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
             preparedStmt.setString (1, nom);

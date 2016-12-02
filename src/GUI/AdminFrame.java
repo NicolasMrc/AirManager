@@ -1,5 +1,6 @@
 package GUI;
 
+import Entities.Avion;
 import Entities.MembreEquipage;
 import Entities.TypeAvion;
 import Enum.TypeUtilisateur;
@@ -45,9 +46,9 @@ public class AdminFrame extends JFrame{
     private JPanel optionPanel;
     private JButton retourButton;
     private JButton deconnexionButton;
-    private JPanel suppressionMembreSection;
-    private JTable supprimerMembreTable;
-    private JScrollPane supprimerMembreScrollPanel;
+    private JPanel suppressionSection;
+    private JTable supressionTable;
+    private JScrollPane listeSupression;
     private JButton supprimerMembreButton;
     private JPanel ajoutTypeAvionSection;
     private JTextField nomTypeAvion;
@@ -58,6 +59,14 @@ public class AdminFrame extends JFrame{
     private JTextField referenceAvion;
     private JButton ajouterAvionButton;
     private JComboBox typeAvionCombo;
+    private JButton supprimerTypeAvion;
+    private JButton supprimerAvion;
+    private JTable qualificationTable;
+    private JScrollPane qualificationScrollPane;
+    private JPanel qualificationSection;
+    private JComboBox qualification1Combo;
+    private JComboBox qualification2Combo;
+    private JButton sauvegarderQualificationButton;
 
     /**
      * L'utilisateur courrant
@@ -120,11 +129,18 @@ public class AdminFrame extends JFrame{
          addPanelMouseListener(SupprimerAvionPanel, "supprimerAvion");
 
         this.ajoutMembreSection.setVisible(false);
-        this.suppressionMembreSection.setVisible(false);
+        this.suppressionSection.setVisible(false);
         this.ajoutAvionSection.setVisible(false);
         this.ajoutTypeAvionSection.setVisible(false);
+        this.qualificationSection.setVisible(false);
+
+        this.supprimerMembreButton.setVisible(false);
+        this.supprimerTypeAvion.setVisible(false);
+        this.supprimerAvion.setVisible(false);
 
         this.addButtonActionListener();
+
+
     }
 
     /**
@@ -179,25 +195,28 @@ public class AdminFrame extends JFrame{
         switch (section){
             case "supprimerMembre" :
                 this.titreLabel.setText("Supprimer un membre d'équipage");
-                this.suppressionMembreSection.setVisible(true);
+                this.suppressionSection.setVisible(true);
                 this.setPreferredSize(new Dimension(700, 400));
                 ArrayList<MembreEquipage> membres = this.membreEquipageService.getMembres();
 
-                DefaultTableModel model = new DefaultTableModel();
+                DefaultTableModel modelMembre = new DefaultTableModel();
 
-                model.addColumn("Id");
-                model.addColumn("Nom");
-                model.addColumn("Prenom");
-                model.addColumn("Metier");
+                modelMembre.addColumn("Id");
+                modelMembre.addColumn("Nom");
+                modelMembre.addColumn("Prenom");
+                modelMembre.addColumn("Metier");
 
-                for(MembreEquipage membreEquipage : membres){
-                    Object[] objs = {membreEquipage.getId(), membreEquipage.getNom(), membreEquipage.getPrenom(), membreEquipage.getMetier()};
-                    model.addRow(objs);
+                if(membres != null) {
+                    for (MembreEquipage membreEquipage : membres) {
+                        Object[] objs = {membreEquipage.getId(), membreEquipage.getNom(), membreEquipage.getPrenom(), membreEquipage.getMetier()};
+                        modelMembre.addRow(objs);
+                    }
                 }
 
-                this.supprimerMembreTable = new JTable(model);
-                this.supprimerMembreScrollPanel.setLayout(new ScrollPaneLayout());
-                this.supprimerMembreScrollPanel.getViewport ().add (this.supprimerMembreTable);
+                this.supprimerMembreButton.setVisible(true);
+                this.supressionTable = new JTable(modelMembre);
+                this.listeSupression.setLayout(new ScrollPaneLayout());
+                this.listeSupression.getViewport ().add (this.supressionTable);
                 this.pack();
                 break;
 
@@ -215,6 +234,27 @@ public class AdminFrame extends JFrame{
                 break;
             case "supprimerTypeAvion" :
                 this.titreLabel.setText("Supprimer un type d'avion");
+                this.suppressionSection.setVisible(true);
+                this.setPreferredSize(new Dimension(700, 400));
+                ArrayList<TypeAvion> typeAvions = this.typeAvionService.findAll();
+
+                DefaultTableModel modelTypeAvion = new DefaultTableModel();
+
+                modelTypeAvion.addColumn("Id");
+                modelTypeAvion.addColumn("Nom");
+                modelTypeAvion.addColumn("Nombre de PNC min");
+                modelTypeAvion.addColumn("Nombre de PNC max");
+
+                for(TypeAvion typeAvion: typeAvions){
+                    Object[] objs = {typeAvion.getId(), typeAvion.getNom(), typeAvion.getNbPNCmin(), typeAvion.getNbPNCmax()};
+                    modelTypeAvion.addRow(objs);
+                }
+
+                this.supprimerTypeAvion.setVisible(true);
+                this.supressionTable = new JTable(modelTypeAvion);
+                this.listeSupression.setLayout(new ScrollPaneLayout());
+                this.listeSupression.getViewport ().add (this.supressionTable);
+                this.pack();
                 break;
             case "ajouterAvion" :
                 this.titreLabel.setText("Ajouter un avion");
@@ -229,6 +269,21 @@ public class AdminFrame extends JFrame{
                 break;
             case "qualifierMembre" :
                 this.titreLabel.setText("Qualifier un membre d'équipage");
+                this.qualificationSection.setVisible(true);
+
+                ArrayList<TypeAvion> typeAvions1 = typeAvionService.findAll();
+
+                if(typeAvions1 != null) {
+
+                    this.qualification1Combo.addItem(null);
+                    this.qualification2Combo.addItem(null);
+
+                    for (TypeAvion typeAvion : typeAvions1) {
+                        this.qualification1Combo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
+                        this.qualification2Combo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
+                    }
+                }
+
                 break;
             case "ajouterTypeAvion" :
                 this.titreLabel.setText("Ajouter un type d'avion");
@@ -238,6 +293,28 @@ public class AdminFrame extends JFrame{
                 break;
             case "supprimerAvion" :
                 this.titreLabel.setText("Supprimer un avion");
+                this.suppressionSection.setVisible(true);
+                this.setPreferredSize(new Dimension(700, 400));
+                ArrayList<Avion> avions = this.avionService.findAll();
+
+                DefaultTableModel modelAvion = new DefaultTableModel();
+
+                modelAvion.addColumn("Id");
+                modelAvion.addColumn("Type d'avion");
+                modelAvion.addColumn("Reference");
+
+                if(avions != null) {
+                    for (Avion avion : avions) {
+                        Object[] objs = {avion.getId(), avion.getTypeAvion().getNom(), avion.getRef()};
+                        modelAvion.addRow(objs);
+                    }
+                }
+
+                this.supprimerTypeAvion.setVisible(true);
+                this.supressionTable = new JTable(modelAvion);
+                this.listeSupression.setLayout(new ScrollPaneLayout());
+                this.listeSupression.getViewport ().add (this.supressionTable);
+                this.pack();
                 break;
         }
     }
@@ -251,13 +328,17 @@ public class AdminFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 ajoutMembreSection.setVisible(false);
-                suppressionMembreSection.setVisible(false);
+                suppressionSection.setVisible(false);
                 ajoutAvionSection.setVisible(false);
                 ajoutTypeAvionSection.setVisible(false);
+                qualificationSection.setVisible(false);
                 buttonPanel.setVisible(true);
                 setSize(new Dimension(700, 800));
                 retourButton.setVisible(false);
                 titreLabel.setText("Administration");
+                supprimerMembreButton.setVisible(false);
+                supprimerTypeAvion.setVisible(false);
+                supprimerAvion.setVisible(false);
             }
         });
 
@@ -268,6 +349,7 @@ public class AdminFrame extends JFrame{
                 dispose();
             }
         });
+
         ajouterMembreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -300,22 +382,6 @@ public class AdminFrame extends JFrame{
                 }
             }
         });
-        supprimerMembreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedRow = supprimerMembreTable.getSelectedRow();
-                try{
-                    Object id = (supprimerMembreTable.getValueAt(selectedRow, 0));
-                    membreEquipageService.delete((int)id);
-                    ((DefaultTableModel)supprimerMembreTable.getModel()).removeRow(selectedRow);
-                } catch (ArrayIndexOutOfBoundsException ex){
-                    JPanel panel = new JPanel();
-                    JOptionPane.showMessageDialog(panel, "Vous devez selectionner un membre à supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
-
-            }
-        });
-
 
         ajouterTypeAvionButton.addActionListener(new ActionListener() {
             @Override
@@ -359,6 +425,50 @@ public class AdminFrame extends JFrame{
                 }
             }
         });
+
+        supprimerTypeAvion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = getIdSelectedRow();
+                typeAvionService.delete(id);
+                deleteSelectedRow();
+            }
+        });
+
+        supprimerMembreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = getIdSelectedRow();
+                membreEquipageService.delete(id);
+                deleteSelectedRow();
+            }
+        });
+
+        supprimerAvion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = getIdSelectedRow();
+                avionService.delete(id);
+                deleteSelectedRow();
+            }
+        });
+    }
+
+    public int getIdSelectedRow(){
+        int selectedRow = supressionTable.getSelectedRow();
+        try{
+            Object id = (supressionTable.getValueAt(selectedRow, 0));
+            return (int)id;
+        } catch (ArrayIndexOutOfBoundsException ex){
+            JPanel panel = new JPanel();
+            JOptionPane.showMessageDialog(panel, "Vous devez selectionner un membre à supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        return -1;
+    }
+
+    public void deleteSelectedRow(){
+        int selectedRow = supressionTable.getSelectedRow();
+        ((DefaultTableModel) supressionTable.getModel()).removeRow(selectedRow);
     }
 
     /**

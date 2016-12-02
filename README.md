@@ -16,4 +16,5 @@ Ouvrir et éditer le fichier BDDConfig.java et remplacer les informations par le
 ### TODO
 - Script SQL de creation de la base
 - Script de population de la base
+- Interface Repository
 - ...
