@@ -271,18 +271,25 @@ public class AdminFrame extends JFrame{
                 this.titreLabel.setText("Qualifier un membre d'équipage");
                 this.qualificationSection.setVisible(true);
 
-                ArrayList<TypeAvion> typeAvions1 = typeAvionService.findAll();
+                ArrayList<MembreEquipage> membresQualification = this.membreEquipageService.getMembres();
 
-                if(typeAvions1 != null) {
+                DefaultTableModel modelMembrQualification = new DefaultTableModel();
 
-                    this.qualification1Combo.addItem(null);
-                    this.qualification2Combo.addItem(null);
+                modelMembrQualification.addColumn("Id");
+                modelMembrQualification.addColumn("Nom");
+                modelMembrQualification.addColumn("Prenom");
+                modelMembrQualification.addColumn("Metier");
 
-                    for (TypeAvion typeAvion : typeAvions1) {
-                        this.qualification1Combo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
-                        this.qualification2Combo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
+                if(membresQualification != null) {
+                    for (MembreEquipage membreEquipage : membresQualification) {
+                        Object[] objs = {membreEquipage.getId(), membreEquipage.getNom(), membreEquipage.getPrenom(), membreEquipage.getMetier()};
+                        modelMembrQualification.addRow(objs);
                     }
                 }
+
+                this.qualificationTable = new JTable(modelMembrQualification);
+                this.qualificationScrollPane.setLayout(new ScrollPaneLayout());
+                this.qualificationScrollPane.getViewport ().add (this.qualificationTable);
 
                 break;
             case "ajouterTypeAvion" :
