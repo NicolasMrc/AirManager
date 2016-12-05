@@ -130,6 +130,24 @@ public class MembreEquipageRepository {
         }
     }
 
+    public MembreEquipage findOneById(int id){
+        try {
+
+            String query = "select * from membre m where m.id = ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet rs = preparedStmt.executeQuery();
+
+            if(rs.next()) {
+                return this.mapResultSet(rs);
+            }
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     /**
      * permet de creer un Membre d'equipage a partir du resultset
      * @param rs

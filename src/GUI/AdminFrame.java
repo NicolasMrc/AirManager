@@ -10,6 +10,8 @@ import Services.AvionService;
 import Services.MembreEquipageService;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.concurrent.Exchanger;
 
 import Enum.TypeMembreEquipage;
 import Services.TypeAvionService;
@@ -139,6 +142,7 @@ public class AdminFrame extends JFrame{
         this.supprimerAvion.setVisible(false);
 
         this.addButtonActionListener();
+
 
 
     }
@@ -290,6 +294,43 @@ public class AdminFrame extends JFrame{
                 this.qualificationTable = new JTable(modelMembrQualification);
                 this.qualificationScrollPane.setLayout(new ScrollPaneLayout());
                 this.qualificationScrollPane.getViewport ().add (this.qualificationTable);
+
+                ArrayList<TypeAvion> typesAvions = this.typeAvionService.findAll();
+
+                //TODO reword ca parce que ca peut etre mieux
+                this.qualificationTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+                    public void valueChanged(ListSelectionEvent event) {
+                        try{
+                            int idMembreSelectionne = (Integer)qualificationTable.getValueAt(qualificationTable.getSelectedRow(), 0);
+                            MembreEquipage membreSelectionne =  membreEquipageService.findOneById(idMembreSelectionne);
+
+                            TypeAvion typeAvionQualifie1 = null;
+                            TypeAvion typeAvionQualifie2 = null;
+
+                            qualification1Combo.addItem(null);
+                            qualification2Combo.addItem(null);
+
+                            if (membreSelectionne.getTypeAvion().size() >= 1 && membreSelectionne.getTypeAvion().get(0) != null) {
+                                typeAvionQualifie1 = membreSelectionne.getTypeAvion().get(0);
+                                qualification1Combo.setSelectedItem(new ComboItem(typeAvionQualifie1.getNom(), String.valueOf(typeAvionQualifie1.getId())));
+                            }
+                            if (membreSelectionne.getTypeAvion().size() >= 2 && membreSelectionne.getTypeAvion().get(1) != null) {
+                                typeAvionQualifie2 = membreSelectionne.getTypeAvion().get(1);
+                                qualification2Combo.setSelectedItem(new ComboItem(typeAvionQualifie2.getNom(), String.valueOf(typeAvionQualifie2.getId())));
+                            }
+
+                            for(TypeAvion typeAvion : typesAvions){
+                                if(!typeAvion.equals(typeAvionQualifie1) && !typeAvion.equals(typeAvionQualifie2)){
+                                    qualification1Combo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
+                                    qualification2Combo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
+                                }
+                            }
+                        } catch (EmptyFieldException e){
+                            System.out.println("erreur voodoo");
+                        }
+
+                    }
+                });
 
                 break;
             case "ajouterTypeAvion" :
@@ -457,6 +498,21 @@ public class AdminFrame extends JFrame{
                 int id = getIdSelectedRow();
                 avionService.delete(id);
                 deleteSelectedRow();
+            }
+        });
+
+        sauvegarderQualificationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int idMembreSelectionne = (Integer) qualificationTable.getValueAt(qualificationTable.getSelectedRow(), 0);
+                    MembreEquipage membreSelectionne = membreEquipageService.findOneById(idMembreSelectionne);
+                    Integer idQualification1 = Integer.valueOf(((ComboItem) qualification1Combo.getSelectedItem()).getValue());
+                    Integer idQualification2 = Integer.valueOf(((ComboItem) qualification2Combo.getSelectedItem()).getValue());
+                    membreEquipageService.qualification(membreSelectionne, idQualification1, idQualification2);
+                } catch (Exception ex){
+                    System.out.println(ex.getMessage());
+                }
             }
         });
     }

@@ -75,4 +75,8 @@ public class MembreEquipage {
     public String getMetier(){
         return "";
     }
+
+    public ArrayList<TypeAvion> getTypeAvion() {
+        return typeAvion;
+    }
 }
