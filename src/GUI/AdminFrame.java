@@ -283,10 +283,20 @@ public class AdminFrame extends JFrame{
                 modelMembrQualification.addColumn("Nom");
                 modelMembrQualification.addColumn("Prenom");
                 modelMembrQualification.addColumn("Metier");
+                modelMembrQualification.addColumn("Qualification");
+                modelMembrQualification.addColumn("Qualification");
 
                 if(membresQualification != null) {
                     for (MembreEquipage membreEquipage : membresQualification) {
-                        Object[] objs = {membreEquipage.getId(), membreEquipage.getNom(), membreEquipage.getPrenom(), membreEquipage.getMetier()};
+                        String qualif1 = "";
+                        String qualif2 = "";
+                        if (membreEquipage.getQualifications().size() > 0){
+                            qualif1 = membreEquipage.getQualifications().get(0).getNom();
+                        }
+                        if (membreEquipage.getQualifications().size() >= 2) {
+                            qualif2 = membreEquipage.getQualifications().get(1).getNom();
+                        }
+                        Object[] objs = {membreEquipage.getId(), membreEquipage.getNom(), membreEquipage.getPrenom(), membreEquipage.getMetier(), qualif1, qualif2};
                         modelMembrQualification.addRow(objs);
                     }
                 }
@@ -310,12 +320,12 @@ public class AdminFrame extends JFrame{
                             qualification1Combo.addItem(null);
                             qualification2Combo.addItem(null);
 
-                            if (membreSelectionne.getTypeAvion().size() >= 1 && membreSelectionne.getTypeAvion().get(0) != null) {
-                                typeAvionQualifie1 = membreSelectionne.getTypeAvion().get(0);
+                            if (membreSelectionne.getQualifications().size() >= 1 && membreSelectionne.getQualifications().get(0) != null) {
+                                typeAvionQualifie1 = membreSelectionne.getQualifications().get(0);
                                 qualification1Combo.setSelectedItem(new ComboItem(typeAvionQualifie1.getNom(), String.valueOf(typeAvionQualifie1.getId())));
                             }
-                            if (membreSelectionne.getTypeAvion().size() >= 2 && membreSelectionne.getTypeAvion().get(1) != null) {
-                                typeAvionQualifie2 = membreSelectionne.getTypeAvion().get(1);
+                            if (membreSelectionne.getQualifications().size() >= 2 && membreSelectionne.getQualifications().get(1) != null) {
+                                typeAvionQualifie2 = membreSelectionne.getQualifications().get(1);
                                 qualification2Combo.setSelectedItem(new ComboItem(typeAvionQualifie2.getNom(), String.valueOf(typeAvionQualifie2.getId())));
                             }
 

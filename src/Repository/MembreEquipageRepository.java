@@ -2,6 +2,7 @@ package Repository;
 
 import Entities.*;
 import Enum.TypeMembreEquipage;
+import Services.TypeAvionService;
 import config.BDDConfig;
 
 import java.sql.*;
@@ -33,6 +34,8 @@ public class MembreEquipageRepository {
      */
     private Connection connexion = null;
 
+    private TypeAvionRepository typeAvionRepository = new TypeAvionRepository();
+
     /**
      * constructeur vide initialisant la connexion avec la bdd
      */
@@ -50,33 +53,41 @@ public class MembreEquipageRepository {
 
     /**
      * permet de sauvegarder un membre en base
-     * @param nom
-     *      le nom du membre d'equipage
-     * @param prenom
-     *      le prenom du membre d'equipage
-     * @param typeMembreEquipage
-     *      le type du membre d'équipage
+     * @param membreEquipage
+     *      le membre d'equipage a sauvegarder
      */
-    public void save(String nom, String prenom, TypeMembreEquipage typeMembreEquipage){
+    public void save(MembreEquipage membreEquipage){
 
         int type;
-        if (typeMembreEquipage.equals(TypeMembreEquipage.PILOTE)){
+        if (membreEquipage.getMetier().equals(TypeMembreEquipage.PILOTE)){
             type = 0;
-        } else if (typeMembreEquipage.equals(TypeMembreEquipage.COPILOTE)){
+        } else if (membreEquipage.getMetier().equals(TypeMembreEquipage.COPILOTE)){
             type = 1;
         } else {
             type = 2;
         }
 
+        this.deleteExistingQualification(membreEquipage.getId());
+
+
+
         String query = "insert into membre (nom, prenom, type) values (?, ?, ?)";
 
         try {
-            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
-            preparedStmt.setString (1, nom);
-            preparedStmt.setString (2, prenom);
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setString (1, membreEquipage.getNom());
+            preparedStmt.setString (2, membreEquipage.getPrenom());
             preparedStmt.setInt    (3, type);
 
             preparedStmt.execute();
+
+            ResultSet generatedId = preparedStmt.getGeneratedKeys();
+
+            if(generatedId.next()){
+                for(TypeAvion qualification : membreEquipage.getQualifications()){
+                    this.saveQualification(qualification, generatedId.getInt(1));
+                }
+            }
 
         } catch (SQLException e ) {
             System.out.println(e.getMessage());
@@ -118,9 +129,9 @@ public class MembreEquipageRepository {
      * @param id
      *      l'id du membre que l'on souhaite supprimer
      */
-    public void delete(int id){
+    public void deleteById(String table, int id){
         try {
-            String query = "delete from membre where id = ?";
+            String query = "delete from " + table + " where id = ?";
             PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
             preparedStmt.setInt(1, id);
             preparedStmt.execute();
@@ -132,7 +143,6 @@ public class MembreEquipageRepository {
 
     public MembreEquipage findOneById(int id){
         try {
-
             String query = "select * from membre m where m.id = ?";
             PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
             preparedStmt.setInt(1, id);
@@ -163,12 +173,69 @@ public class MembreEquipageRepository {
             int type = rs.getInt("type");
 
             if(type == 0){
-                return new Pilote(id, nom, prenom);
+                ArrayList<TypeAvion> test = this.getQualificationByMembreId(id);
+                return new Pilote(id, nom, prenom, this.getQualificationByMembreId(id));
             } else if (type == 1){
-                return new Copilote(id, nom, prenom);
+                return new Copilote(id, nom, prenom, this.getQualificationByMembreId(id));
             } else {
-                return new PNC(id, nom, prenom);
+                return new PNC(id, nom, prenom, this.getQualificationByMembreId(id));
             }
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public void deleteMembre(int id){
+        MembreEquipage membreEquipage = this.findOneById(id);
+        this.deleteExistingQualification(membreEquipage.getId());
+        this.deleteById("membre", id);
+    }
+
+    public void deleteExistingQualification(int idMembre){
+        try {
+            String query = "delete from membre_type_avion where id_membre= ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, idMembre);
+            preparedStmt.execute();
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void saveQualification(TypeAvion typeAvion, int idMembre){
+        String query = "insert into membre_type_avion (id_membre, id_type_avion) values (?, ?)";
+
+        try {
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt (1, idMembre);
+            preparedStmt.setInt (2, typeAvion.getId());
+
+            preparedStmt.execute();
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public ArrayList<TypeAvion> getQualificationByMembreId(int id){
+        try {
+            String query = "select * from membre_type_avion where id_membre = ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet rs = preparedStmt.executeQuery();
+
+            ArrayList<TypeAvion> qualifications = new ArrayList<>();
+
+            while(rs.next()) {
+                int id_type_avion = rs.getInt("id_type_avion");
+
+                qualifications.add(this.typeAvionRepository.findOneById(id_type_avion));
+            }
+
+            return qualifications;
+
         } catch (SQLException e ) {
             System.out.println(e.getMessage());
         }

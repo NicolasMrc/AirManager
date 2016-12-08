@@ -1,12 +1,22 @@
 package Entities;
+import Enum.TypeMembreEquipage;
+
+import java.util.ArrayList;
 
 /**
  * Created by Nico on 28/11/2016.
  */
 public class PNC extends MembreEquipage {
-    public PNC(int id, String nom, String prenom) {
-        super(id, nom, prenom);
+    public PNC(int id, String nom, String prenom, ArrayList<TypeAvion> qualifications) {
+        super(id, nom, prenom, qualifications);
+        super.setMetier(TypeMembreEquipage.PNC);
     }
+
+    public PNC(String nom, String prenom, ArrayList<TypeAvion> qualifications) {
+        super(nom, prenom, qualifications);
+        super.setMetier(TypeMembreEquipage.PNC);
+    }
+
 
     @Override
     public String toString(){
@@ -14,7 +24,7 @@ public class PNC extends MembreEquipage {
     }
 
     @Override
-    public String getMetier(){
-        return "PNC";
+    public TypeMembreEquipage getMetier(){
+        return TypeMembreEquipage.PNC;
     }
 }

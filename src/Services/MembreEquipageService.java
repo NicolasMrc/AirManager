@@ -1,6 +1,6 @@
 package Services;
 
-import Entities.MembreEquipage;
+import Entities.*;
 import Enum.TypeMembreEquipage;
 import Exceptions.EmptyFieldException;
 import Repository.MembreEquipageRepository;
@@ -18,7 +18,24 @@ public class MembreEquipageService {
 
     public void addMembreEquipage(String nom, String prenom, TypeMembreEquipage typeMembreEquipage){
         if(!prenom.isEmpty() && !nom.isEmpty() && typeMembreEquipage != null ){
-            this.membreEquipageRepository.save(nom, prenom, typeMembreEquipage);
+            ArrayList<TypeAvion> qualifications = new ArrayList<>();
+            try {
+                //TODO supprimer ca et faire l'ajout de qualification dynaiquement
+                qualifications.add(typeAvionService.findOneById(10));
+                qualifications.add(typeAvionService.findOneById(12));
+            } catch (Exception e){
+
+            }
+            if (typeMembreEquipage.equals(TypeMembreEquipage.PILOTE)){
+                Pilote pilote = new Pilote(prenom, nom, qualifications);
+                this.membreEquipageRepository.save(pilote);
+            } else if (typeMembreEquipage.equals(TypeMembreEquipage.COPILOTE)){
+                Copilote copilote = new Copilote(prenom, nom, qualifications);
+                this.membreEquipageRepository.save(copilote);
+            } else if (typeMembreEquipage.equals(TypeMembreEquipage.PNC)){
+                PNC pnc = new PNC(prenom, nom, qualifications);
+                this.membreEquipageRepository.save(pnc);
+            }
         }
     }
 
@@ -33,15 +50,15 @@ public class MembreEquipageService {
     }
 
     public void delete(int id){
-        this.membreEquipageRepository.delete(id);
+        this.membreEquipageRepository.deleteMembre(id);
     }
 
     public void qualification(MembreEquipage membreEquipage, Integer idQualification1, Integer idQualification2){
         if (membreEquipage != null){
             if(idQualification1 != null && idQualification2 != null) {
                 try {
-                    membreEquipage.getTypeAvion().add(0, this.typeAvionService.findOneById(idQualification1));
-                    membreEquipage.getTypeAvion().add(1, this.typeAvionService.findOneById(idQualification2));
+                    membreEquipage.getQualifications().add(0, this.typeAvionService.findOneById(idQualification1));
+                    membreEquipage.getQualifications().add(1, this.typeAvionService.findOneById(idQualification2));
                 } catch (Exception e){
                     System.out.println(e.getMessage());
                 }

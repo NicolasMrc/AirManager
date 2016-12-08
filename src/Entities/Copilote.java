@@ -1,11 +1,20 @@
 package Entities;
+import Enum.TypeMembreEquipage;
+
+import java.util.ArrayList;
 
 /**
  * Created by Nico on 28/11/2016.
  */
 public class Copilote extends MembreEquipage {
-    public Copilote(int id, String nom, String prenom) {
-        super(id, nom, prenom);
+    public Copilote(int id, String nom, String prenom, ArrayList<TypeAvion> qualifications) {
+        super(id, nom, prenom, qualifications);
+        super.setMetier(TypeMembreEquipage.COPILOTE);
+    }
+
+    public Copilote(String nom, String prenom, ArrayList<TypeAvion> qualifications) {
+        super(nom, prenom, qualifications);
+        super.setMetier(TypeMembreEquipage.COPILOTE);
     }
 
     @Override
@@ -14,7 +23,9 @@ public class Copilote extends MembreEquipage {
     }
 
     @Override
-    public String getMetier(){
-        return "Copilote";
+    public TypeMembreEquipage getMetier(){
+        return TypeMembreEquipage.COPILOTE;
     }
+
+
 }
