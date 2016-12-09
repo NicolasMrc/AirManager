@@ -70,6 +70,18 @@ public class AdminFrame extends JFrame{
     private JComboBox qualification1Combo;
     private JComboBox qualification2Combo;
     private JButton sauvegarderQualificationButton;
+    private JPanel creerVolSection;
+    private JPanel supprimerVolSection;
+    private JTable volTable;
+    private JTextField numeroVol;
+    private JTextField siteVol;
+    private JTextField destinationVol;
+    private JTextField dateVol;
+    private JComboBox piloteVol;
+    private JComboBox copiloteVol;
+    private JComboBox avionVol;
+    private JButton supprimerVolButton;
+    private JButton ajouterVolButton;
 
     /**
      * L'utilisateur courrant
@@ -136,6 +148,8 @@ public class AdminFrame extends JFrame{
         this.ajoutAvionSection.setVisible(false);
         this.ajoutTypeAvionSection.setVisible(false);
         this.qualificationSection.setVisible(false);
+        this.creerVolSection.setVisible(false);
+        this.supprimerVolSection.setVisible(false);
 
         this.supprimerMembreButton.setVisible(false);
         this.supprimerTypeAvion.setVisible(false);
@@ -234,18 +248,21 @@ public class AdminFrame extends JFrame{
                 this.listeSupression.getViewport ().add (this.supressionTable);
                 this.pack();
                 break;
-
-            case "supprimerVol" :
-                this.titreLabel.setText("Supprimer un vol");
-                break;
             case "ajouterMembre" :
                 this.titreLabel.setText("Ajouter un membre d'équipage");
                 this.ajoutMembreSection.setVisible(true);
                 this.setPreferredSize(new Dimension(700, 400));
                 this.pack();
                 break;
+            case "supprimerVol" :
+                this.titreLabel.setText("Supprimer un vol");
+                this.supprimerVolSection.setVisible(true);
+                break;
             case "ajouterVol" :
                 this.titreLabel.setText("Ajouter un vol");
+                this.creerVolSection.setVisible(true);
+                this.setPreferredSize(new Dimension(700, 350));
+                this.pack();
                 break;
             case "supprimerTypeAvion" :
                 this.titreLabel.setText("Supprimer un type d'avion");
@@ -413,6 +430,8 @@ public class AdminFrame extends JFrame{
                 supprimerMembreButton.setVisible(false);
                 supprimerTypeAvion.setVisible(false);
                 supprimerAvion.setVisible(false);
+                supprimerVolSection.setVisible(false);
+                creerVolSection.setVisible(false);
             }
         });
 
@@ -524,6 +543,20 @@ public class AdminFrame extends JFrame{
                 int id = getIdSelectedRow();
                 avionService.delete(id);
                 deleteSelectedRow();
+            }
+        });
+
+        ajouterVolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO ajout Vol
+            }
+        });
+
+        supprimerVolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO supprimer vol
             }
         });
 
