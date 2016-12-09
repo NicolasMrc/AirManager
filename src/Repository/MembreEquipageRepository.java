@@ -241,4 +241,12 @@ public class MembreEquipageRepository {
         }
         return null;
     }
+
+    public MembreEquipage updateQualifications(MembreEquipage membreEquipage){
+        this.deleteExistingQualification(membreEquipage.getId());
+        for(TypeAvion qualification : membreEquipage.getQualifications()){
+            this.saveQualification(qualification, membreEquipage.getId());
+        }
+        return this.findOneById(membreEquipage.getId());
+    }
 }

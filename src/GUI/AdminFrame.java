@@ -198,6 +198,7 @@ public class AdminFrame extends JFrame{
         this.retourButton.setVisible(true);
         switch (section){
             case "supprimerMembre" :
+
                 this.titreLabel.setText("Supprimer un membre d'équipage");
                 this.suppressionSection.setVisible(true);
                 this.setPreferredSize(new Dimension(700, 400));
@@ -209,10 +210,20 @@ public class AdminFrame extends JFrame{
                 modelMembre.addColumn("Nom");
                 modelMembre.addColumn("Prenom");
                 modelMembre.addColumn("Metier");
+                modelMembre.addColumn("Qualification");
+                modelMembre.addColumn("Qualification");
 
-                if(membres != null) {
+                if(modelMembre != null) {
                     for (MembreEquipage membreEquipage : membres) {
-                        Object[] objs = {membreEquipage.getId(), membreEquipage.getNom(), membreEquipage.getPrenom(), membreEquipage.getMetier()};
+                        String qualif1 = "";
+                        String qualif2 = "";
+                        if (membreEquipage.getQualifications().size() > 0){
+                            qualif1 = membreEquipage.getQualifications().get(0).getNom();
+                        }
+                        if (membreEquipage.getQualifications().size() >= 2) {
+                            qualif2 = membreEquipage.getQualifications().get(1).getNom();
+                        }
+                        Object[] objs = {membreEquipage.getId(), membreEquipage.getNom(), membreEquipage.getPrenom(), membreEquipage.getMetier(), qualif1, qualif2};
                         modelMembre.addRow(objs);
                     }
                 }
@@ -314,16 +325,11 @@ public class AdminFrame extends JFrame{
                             int idMembreSelectionne = (Integer)qualificationTable.getValueAt(qualificationTable.getSelectedRow(), 0);
                             MembreEquipage membreSelectionne =  membreEquipageService.findOneById(idMembreSelectionne);
 
-                            TypeAvion typeAvionQualifie1 = null;
-                            TypeAvion typeAvionQualifie2 = null;
-
                             qualification1Combo.removeAllItems();
                             qualification2Combo.removeAllItems();
 
                             qualification1Combo.addItem(null);
                             qualification2Combo.addItem(null);
-
-
 
                             for(TypeAvion typeAvion : typesAvions){
 
@@ -343,14 +349,12 @@ public class AdminFrame extends JFrame{
                                         qualification2Combo.setSelectedItem(combo2Item);
                                     }
                                 }
-
                             }
 
 
                         } catch (EmptyFieldException e){
-                            System.out.println("erreur voodoo");
+                            System.out.println(e.getMessage());
                         }
-
                     }
                 });
 
@@ -531,7 +535,20 @@ public class AdminFrame extends JFrame{
                     MembreEquipage membreSelectionne = membreEquipageService.findOneById(idMembreSelectionne);
                     Integer idQualification1 = Integer.valueOf(((ComboItem) qualification1Combo.getSelectedItem()).getValue());
                     Integer idQualification2 = Integer.valueOf(((ComboItem) qualification2Combo.getSelectedItem()).getValue());
-                    membreEquipageService.qualification(membreSelectionne, idQualification1, idQualification2);
+                    MembreEquipage membreEquipage = membreEquipageService.qualification(membreSelectionne, idQualification1, idQualification2);
+
+                    String qualif1 = "";
+                    String qualif2 = "";
+                    if (membreEquipage.getQualifications().size() > 0){
+                        qualif1 = membreEquipage.getQualifications().get(0).getNom();
+                    }
+                    if (membreEquipage.getQualifications().size() >= 2) {
+                        qualif2 = membreEquipage.getQualifications().get(1).getNom();
+                    }
+
+                    DefaultTableModel modelMembreQualification = (DefaultTableModel)qualificationTable.getModel();
+                    modelMembreQualification.setValueAt(qualif1, qualificationTable.getSelectedRow(), 4);
+                    modelMembreQualification.setValueAt(qualif2, qualificationTable.getSelectedRow(), 5);
                 } catch (Exception ex){
                     System.out.println(ex.getMessage());
                 }

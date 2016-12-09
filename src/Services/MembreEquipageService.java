@@ -53,16 +53,18 @@ public class MembreEquipageService {
         this.membreEquipageRepository.deleteMembre(id);
     }
 
-    public void qualification(MembreEquipage membreEquipage, Integer idQualification1, Integer idQualification2){
+    public MembreEquipage qualification(MembreEquipage membreEquipage, Integer idQualification1, Integer idQualification2){
         if (membreEquipage != null){
             if(idQualification1 != null && idQualification2 != null) {
                 try {
                     membreEquipage.getQualifications().add(0, this.typeAvionService.findOneById(idQualification1));
                     membreEquipage.getQualifications().add(1, this.typeAvionService.findOneById(idQualification2));
+                    return this.membreEquipageRepository.updateQualifications(membreEquipage);
                 } catch (Exception e){
                     System.out.println(e.getMessage());
                 }
             }
         }
+        return null;
     }
 }
