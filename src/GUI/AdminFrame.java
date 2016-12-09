@@ -317,24 +317,36 @@ public class AdminFrame extends JFrame{
                             TypeAvion typeAvionQualifie1 = null;
                             TypeAvion typeAvionQualifie2 = null;
 
+                            qualification1Combo.removeAllItems();
+                            qualification2Combo.removeAllItems();
+
                             qualification1Combo.addItem(null);
                             qualification2Combo.addItem(null);
 
-                            if (membreSelectionne.getQualifications().size() >= 1 && membreSelectionne.getQualifications().get(0) != null) {
-                                typeAvionQualifie1 = membreSelectionne.getQualifications().get(0);
-                                qualification1Combo.setSelectedItem(new ComboItem(typeAvionQualifie1.getNom(), String.valueOf(typeAvionQualifie1.getId())));
-                            }
-                            if (membreSelectionne.getQualifications().size() >= 2 && membreSelectionne.getQualifications().get(1) != null) {
-                                typeAvionQualifie2 = membreSelectionne.getQualifications().get(1);
-                                qualification2Combo.setSelectedItem(new ComboItem(typeAvionQualifie2.getNom(), String.valueOf(typeAvionQualifie2.getId())));
-                            }
+
 
                             for(TypeAvion typeAvion : typesAvions){
-                                if(!typeAvion.equals(typeAvionQualifie1) && !typeAvion.equals(typeAvionQualifie2)){
-                                    qualification1Combo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
-                                    qualification2Combo.addItem(new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId())));
+
+                                ComboItem combo1Item = new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId()));
+                                ComboItem combo2Item = new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId()));
+
+                                qualification1Combo.addItem(combo1Item);
+                                qualification2Combo.addItem(combo2Item);
+
+                                if (membreSelectionne.getQualifications().size() >= 1 && membreSelectionne.getQualifications().get(0) != null) {
+                                    if(membreSelectionne.getQualifications().get(0).getNom().equals(typeAvion.getNom())){
+                                        qualification1Combo.setSelectedItem(combo1Item);
+                                    }
                                 }
+                                if (membreSelectionne.getQualifications().size() >= 2 && membreSelectionne.getQualifications().get(1) != null) {
+                                    if(membreSelectionne.getQualifications().get(1).getNom().equals(typeAvion.getNom())){
+                                        qualification2Combo.setSelectedItem(combo2Item);
+                                    }
+                                }
+
                             }
+
+
                         } catch (EmptyFieldException e){
                             System.out.println("erreur voodoo");
                         }
