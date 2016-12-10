@@ -46,4 +46,15 @@ public class AvionService {
     public ArrayList<Avion> findAll(){
         return this.avionRepository.findAll();
     }
+
+    /**
+     * retourne un avion par son id
+     * @param id
+     *      l'id
+     * @return
+     *      l'avion
+     */
+    public Avion findOneById(int id){
+        return this.avionRepository.findOneById(id);
+    }
 }

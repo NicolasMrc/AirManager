@@ -8,15 +8,26 @@ import java.util.ArrayList;
  * Created by Nico on 28/11/2016.
  */
 public class Equipage {
+    private int id;
     private boolean atMin;
     private boolean atMax;
     private Pilote pilote;
     private Copilote copilote;
     private ArrayList<PNC> pncs;
-    private Vol vol;
 
-    public Equipage(Vol vol) {
-        this.vol = vol;
+    //TODO ajouter le vol ? je ne vois pas l'interet
+
+    public Equipage(int id, Pilote pilote, Copilote copilote, ArrayList<PNC> pncs) {
+        this.id = id;
+        this.pilote = pilote;
+        this.copilote = copilote;
+        this.pncs = pncs;
+    }
+
+    public Equipage(Pilote pilote, Copilote copilote, ArrayList<PNC> pncs) {
+        this.pilote = pilote;
+        this.copilote = copilote;
+        this.pncs = pncs;
     }
 
     public void addPilote(Pilote pilote) throws EquipageException {
@@ -49,5 +60,9 @@ public class Equipage {
 
     public Pilote getPilote() {
         return pilote;
+    }
+
+    public int getId() {
+        return id;
     }
 }

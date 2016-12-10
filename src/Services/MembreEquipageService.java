@@ -67,4 +67,12 @@ public class MembreEquipageService {
         }
         return null;
     }
+
+    public ArrayList<MembreEquipage> findAllByMetierAndQualification(TypeMembreEquipage typeMembreEquipage, TypeAvion typeAvion){
+        if(typeMembreEquipage != null && typeAvion != null) {
+            return this.membreEquipageRepository.findAllByMetierAndQualification(typeMembreEquipage, typeAvion);
+        } else {
+            return null;
+        }
+    }
 }

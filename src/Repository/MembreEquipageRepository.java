@@ -2,7 +2,6 @@ package Repository;
 
 import Entities.*;
 import Enum.TypeMembreEquipage;
-import Services.TypeAvionService;
 import config.BDDConfig;
 
 import java.sql.*;
@@ -242,11 +241,47 @@ public class MembreEquipageRepository {
         return null;
     }
 
+    public ArrayList<MembreEquipage> getQualificationByTypeAvionId(int id){
+        try {
+            String query = "select * from membre_type_avion where id_type_avion = ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet rs = preparedStmt.executeQuery();
+
+            ArrayList<MembreEquipage> membreEquipages = new ArrayList<>();
+
+            while(rs.next()) {
+                int id_membre = rs.getInt("id_membre");
+
+                membreEquipages.add(this.findOneById(id_membre));
+            }
+
+            return membreEquipages;
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     public MembreEquipage updateQualifications(MembreEquipage membreEquipage){
         this.deleteExistingQualification(membreEquipage.getId());
         for(TypeAvion qualification : membreEquipage.getQualifications()){
             this.saveQualification(qualification, membreEquipage.getId());
         }
         return this.findOneById(membreEquipage.getId());
+    }
+
+    public ArrayList<MembreEquipage> findAllByMetierAndQualification(TypeMembreEquipage typeMembreEquipage, TypeAvion typeAvion){
+        ArrayList<MembreEquipage> membreEquipages = this.getQualificationByTypeAvionId(typeAvion.getId());
+        ArrayList<MembreEquipage> membreCorrespondant = new ArrayList<>();
+
+        for (MembreEquipage membreEquipage : membreEquipages){
+            if(membreEquipage.getMetier().equals(typeMembreEquipage)){
+                membreCorrespondant.add(membreEquipage);
+            }
+        }
+
+        return membreCorrespondant;
     }
 }
