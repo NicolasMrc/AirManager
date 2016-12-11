@@ -68,8 +68,6 @@ public class AdminFrame extends JFrame{
     private JComboBox qualification2Combo;
     private JButton sauvegarderQualificationButton;
     private JPanel creerVolSection;
-    private JPanel supprimerVolSection;
-    private JTable volTable;
     private JTextField numeroVol;
     private JTextField siteVol;
     private JTextField destinationVol;
@@ -156,15 +154,13 @@ public class AdminFrame extends JFrame{
         this.ajoutTypeAvionSection.setVisible(false);
         this.qualificationSection.setVisible(false);
         this.creerVolSection.setVisible(false);
-        this.supprimerVolSection.setVisible(false);
 
         this.supprimerMembreButton.setVisible(false);
         this.supprimerTypeAvion.setVisible(false);
         this.supprimerAvion.setVisible(false);
+        this.supprimerVolButton.setVisible(false);
 
         this.addButtonActionListener();
-
-
 
     }
 
@@ -263,9 +259,38 @@ public class AdminFrame extends JFrame{
                 break;
             case "supprimerVol" :
                 this.titreLabel.setText("Supprimer un vol");
-                this.supprimerVolSection.setVisible(true);
+
+                this.suppressionSection.setVisible(true);
+                this.setPreferredSize(new Dimension(700, 400));
+
+                ArrayList<Vol> vols = this.volService.findAll();
+
+                DefaultTableModel modelVol = new DefaultTableModel();
+
+                modelVol.addColumn("Id");
+                modelVol.addColumn("Num vol");
+                modelVol.addColumn("Site");
+                modelVol.addColumn("Destination");
+                modelVol.addColumn("Date");
+                modelVol.addColumn("Avion");
+                modelVol.addColumn("Pilote");
+                modelVol.addColumn("Copilote");
+
+                for(Vol vol: vols){
+                    String pilote = vol.getEquipage().getPilote().getPrenom() + " " + vol.getEquipage().getPilote().getNom();
+                    String copilote = vol.getEquipage().getCopilote().getPrenom() + " " + vol.getEquipage().getCopilote().getNom();
+                    Object[] objs = {vol.getId(), vol.getNumero(), vol.getSite(), vol.getDestination(), vol.getDate(), vol.getAvion().getRef(), pilote, copilote};
+                    modelVol.addRow(objs);
+                }
+
+                this.supprimerVolButton.setVisible(true);
+                this.supressionTable = new JTable(modelVol);
+                this.listeSupression.setLayout(new ScrollPaneLayout());
+                this.listeSupression.getViewport ().add (this.supressionTable);
+                this.pack();
                 break;
             case "ajouterVol" :
+                //TODO reinitialiser les champs apres ajout
                 this.titreLabel.setText("Ajouter un vol");
                 this.creerVolSection.setVisible(true);
 
@@ -471,7 +496,6 @@ public class AdminFrame extends JFrame{
                 supprimerMembreButton.setVisible(false);
                 supprimerTypeAvion.setVisible(false);
                 supprimerAvion.setVisible(false);
-                supprimerVolSection.setVisible(false);
                 creerVolSection.setVisible(false);
             }
         });
@@ -625,13 +649,6 @@ public class AdminFrame extends JFrame{
             }
         });
 
-        supprimerVolButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO supprimer vol
-            }
-        });
-
         sauvegarderQualificationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -657,6 +674,15 @@ public class AdminFrame extends JFrame{
                 } catch (Exception ex){
                     System.out.println(ex.getMessage());
                 }
+            }
+        });
+
+        supprimerVolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = getIdSelectedRow();
+                volService.delete(id);
+                deleteSelectedRow();
             }
         });
     }

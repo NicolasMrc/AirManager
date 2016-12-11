@@ -81,4 +81,8 @@ public class Vol {
     public Equipage getEquipage() {
         return equipage;
     }
+
+    public int getId() {
+        return id;
+    }
 }

@@ -6,6 +6,7 @@ import Entities.Vol;
 import config.BDDConfig;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by Nico on 10/12/2016.
@@ -101,6 +102,44 @@ public class VolRepository {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public ArrayList<Vol> findAll(){
+        String query = "SELECT * FROM vol";
+
+        try {
+
+            Statement stmt = this.connexion.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<Vol> vols = new ArrayList<>();
+
+            while (rs.next()) {
+                vols.add(this.mapResultSet(rs));
+            }
+
+            return vols;
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public void delete(int id){
+        try {
+            int idEquipage = this.findOneById(id).getEquipage().getId();
+
+            String query = "delete from vol where id = ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.execute();
+
+            this.equipageRepository.delete(idEquipage);
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

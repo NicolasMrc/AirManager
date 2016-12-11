@@ -96,6 +96,18 @@ public class EquipageRepository {
         return null;
     }
 
+    public void delete(int id){
+        try {
+            String query = "delete from equipage where id = ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.execute();
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     /**
      * permet de creer un Membre d'equipage a partir du resultset
      * @param rs
