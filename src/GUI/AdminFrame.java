@@ -290,7 +290,6 @@ public class AdminFrame extends JFrame{
                 this.pack();
                 break;
             case "ajouterVol" :
-                //TODO reinitialiser les champs apres ajout
                 this.titreLabel.setText("Ajouter un vol");
                 this.creerVolSection.setVisible(true);
 
@@ -638,6 +637,14 @@ public class AdminFrame extends JFrame{
                         Vol vol = new Vol(numVol, site, destination, date, avion, equipage);
                         volService.save(vol);
                     }
+
+                    siteVol.setText("");
+                    destinationVol.setText("");
+                    numeroVol.setText("");
+                    dateVol.setText("");
+                    avionVol.setSelectedItem(null);
+                    piloteVol.setSelectedItem(null);
+                    copiloteVol.setSelectedItem(null);
 
                     creerVolSection.setVisible(false);
                     buttonPanel.setVisible(true);
