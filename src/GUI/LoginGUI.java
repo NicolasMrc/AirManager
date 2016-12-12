@@ -16,9 +16,6 @@ import Services.UtilisateurService;
  */
 public class LoginGUI extends JFrame{
     private JPanel mainPanel;
-    private JLabel adminLabel;
-    private JLabel managerLabel;
-    private JLabel membreLabel;
     private JPanel adminPanel;
     private JPanel managerPanel;
     private JPanel membrePanel;
@@ -39,7 +36,7 @@ public class LoginGUI extends JFrame{
         addPanelMouseListener(this.managerPanel, TypeUtilisateur.MANAGER);
         addPanelMouseListener(this.membrePanel, TypeUtilisateur.MEMBRE_EQUIPAGE);
 
-        this.setSize(new Dimension(510, 260));
+        this.setSize(new Dimension(700, 500));
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         this.setTitle("Login");
@@ -62,6 +59,7 @@ public class LoginGUI extends JFrame{
                 passwordField.setText("");
                 usernameField.setText("");
                 typeUtilisateur = null;
+                setSize(new Dimension(700, 500));
             }
         });
 
@@ -96,7 +94,7 @@ public class LoginGUI extends JFrame{
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                panel.setBackground(new Color(83,33,47));
+                panel.setBackground(new Color(124, 50, 72));
                 panel.repaint();
                 super.mousePressed(e);
             }
@@ -105,6 +103,7 @@ public class LoginGUI extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 rolePanel.setVisible(false);
                 credentialPanel.setVisible(true);
+                setSize(new Dimension(700, 250));
                 typeUtilisateur = type;
                 repaint();
                 super.mouseReleased(e);
@@ -112,14 +111,14 @@ public class LoginGUI extends JFrame{
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                panel.setBackground(new Color(83,33,47));
+                panel.setBackground(new Color(124, 50, 72));
                 panel.repaint();
                 super.mouseEntered(e);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                panel.setBackground(new Color(70,28,40));
+                panel.setBackground(new Color(108,43,62));
                 panel.repaint();
                 super.mouseExited(e);
             }

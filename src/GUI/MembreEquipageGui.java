@@ -73,6 +73,7 @@ public class MembreEquipageGui extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout)(cardPanel.getLayout());
                 cl.show(cardPanel, "menuCard");
+                setSize(new Dimension(800, 550));
             }
         });
         logoutButton.addActionListener(new ActionListener() {
@@ -99,6 +100,7 @@ public class MembreEquipageGui extends JFrame{
                     changeCard("menuCard");
                     oldPasswordField.setText("");
                     newPasswordField.setText("");
+                    setSize(new Dimension(800, 550));
                 }
             }
         });
@@ -177,6 +179,9 @@ public class MembreEquipageGui extends JFrame{
     }
 
     public void changeCard(String card){
+        if(card.equals("gestionCard")){
+            this.setSize(new Dimension(800, 270));
+        }
         CardLayout cl = (CardLayout)(this.cardPanel.getLayout());
         cl.show(this.cardPanel, card);
     }
