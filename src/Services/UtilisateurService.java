@@ -40,4 +40,19 @@ public class UtilisateurService {
         Utilisateur newUtilisateur = new Utilisateur(username, password, typeUtilisateur, idMembre);
         return this.utilisateurRepository.save(newUtilisateur);
     }
+
+    public Utilisateur changeCredential(Utilisateur utilisateur, String username, String oldPassword, String newPassword){
+        if(utilisateur.getPassword().equals(oldPassword)){
+            if(!username.equals("")) {
+                utilisateur.setUsername(username);
+            }
+            if(!newPassword.equals("")) {
+                utilisateur.setPassword(newPassword);
+            }
+        }
+        this.utilisateurRepository.update(utilisateur);
+        return utilisateur;
+    }
+
+
 }

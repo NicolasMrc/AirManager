@@ -124,4 +124,20 @@ public class UtilisateurRepository {
         return null;
 
     }
+
+    public void update(Utilisateur utilisateur){
+        String query = "UPDATE utilisateur SET username = ?, password = ? where id = ?";
+
+        try {
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setString (1, utilisateur.getUsername());
+            preparedStmt.setString (2, utilisateur.getPassword());
+            preparedStmt.setLong (3, utilisateur.getId());
+
+            preparedStmt.executeUpdate();
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

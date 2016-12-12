@@ -2,31 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ae6cf7f-ad34-4cb1-805e-c7e5c794fbf2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GUI/images/consulterVols.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GUI/images/gestionCompte.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GUI/ConsulterVolMembre.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GUI/ConsulterVolMembre.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GUI/MembreEquipageGui.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GUI/MembreEquipageGui.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/Entities/Utilisateur.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/Entities/Utilisateur.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/GUI/AdminFrame.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/GUI/AdminFrame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/GUI/LoginGUI$2.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/GUI/LoginGUI$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/GUI/LoginGUI.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/GUI/LoginGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/Repository/UtilisateurRepository.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/Repository/UtilisateurRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/Services/MembreEquipageService.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/Services/MembreEquipageService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/Services/UtilisateurService.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/Services/UtilisateurService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/config/DataDB.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/config/DataDB.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GUI/images/saveIcon.png" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GUI/ConsulterVolMembre.form" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GUI/ConsulterVolMembre.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/Repository/VolRepository.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/Repository/VolRepository.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AirManager2/Services/VolService.class" afterPath="$PROJECT_DIR$/out/production/AirManager2/Services/VolService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entities/Utilisateur.java" afterPath="$PROJECT_DIR$/src/Entities/Utilisateur.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/AdminFrame.java" afterPath="$PROJECT_DIR$/src/GUI/AdminFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/LoginGUI.java" afterPath="$PROJECT_DIR$/src/GUI/LoginGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/MembreEquipageGui.form" afterPath="$PROJECT_DIR$/src/GUI/MembreEquipageGui.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/MembreEquipageGui.java" afterPath="$PROJECT_DIR$/src/GUI/MembreEquipageGui.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Repository/UtilisateurRepository.java" afterPath="$PROJECT_DIR$/src/Repository/UtilisateurRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Repository/VolRepository.java" afterPath="$PROJECT_DIR$/src/Repository/VolRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Services/MembreEquipageService.java" afterPath="$PROJECT_DIR$/src/Services/MembreEquipageService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Services/UtilisateurService.java" afterPath="$PROJECT_DIR$/src/Services/UtilisateurService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Services/VolService.java" afterPath="$PROJECT_DIR$/src/Services/VolService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config/DataDB.java" afterPath="$PROJECT_DIR$/src/config/DataDB.java" />
     </list>
     <ignored path="AirManager2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,11 +66,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MembreEquipageGui.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MembreEquipageGui.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI/MembreEquipageGui.form">
+          <provider selected="true" editor-type-id="ui-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MembreEquipageGui.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI/MembreEquipageGui.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="82" column="15" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.37576687">
+              <caret line="98" column="44" selection-start-line="98" selection-start-column="44" selection-end-line="98" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -92,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utilisateur.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entities/Utilisateur.java">
+      <file leaf-file-name="UtilisateurService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Services/UtilisateurService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <caret line="45" column="38" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -106,86 +99,42 @@
         <entry file="file://$PROJECT_DIR$/src/Repository/UtilisateurRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+              <caret line="128" column="69" selection-start-line="128" selection-start-column="69" selection-end-line="128" selection-end-column="69" />
               <folding>
-                <marker date="1481553401000" expanded="true" signature="1406:1471" placeholder="SELECT * FRO..utilisateur..." />
-                <marker date="1481553401000" expanded="true" signature="2759:2840" placeholder="insert into utilisateur..." />
+                <marker date="1481557483000" expanded="true" signature="1406:1471" placeholder="SELECT * FRO..utilisateur..." />
+                <marker date="1481557483000" expanded="true" signature="2759:2840" placeholder="insert into utilisateur..." />
+                <marker date="1481557483000" expanded="true" signature="3758:3820" placeholder="UPDATE utili..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminFrame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/AdminFrame.java">
+      <file leaf-file-name="MembreEquipageRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Repository/MembreEquipageRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.185185">
-              <caret line="51" column="24" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+            <state vertical-scroll-proportion="-44.88889">
+              <caret line="205" column="16" selection-start-line="205" selection-start-column="16" selection-end-line="205" selection-end-column="16" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1481328929000" expanded="true" signature="1742:1797" placeholder="insert into membre..." />
+                <marker date="1481328929000" expanded="true" signature="2810:2832" placeholder="SELECT * FRO..membre..." />
+                <marker date="1481328929000" expanded="true" signature="3575:3613" placeholder="delete from ..." />
+                <marker date="1481328929000" expanded="true" signature="3968:4005" placeholder="select * fro..membre..." />
+                <marker date="1481328929000" expanded="true" signature="5696:5744" placeholder="delete from ..." />
+                <marker date="1481328929000" expanded="true" signature="6110:6180" placeholder="insert into membre_type_avion..." />
+                <marker date="1481328929000" expanded="true" signature="6635:6686" placeholder="select * fro..membre_type_avion..." />
+                <marker date="1481328929000" expanded="true" signature="7417:7472" placeholder="select * fro..membre_type_avion..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MembreEquipageGui.form" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/MembreEquipageGui.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConsulterVolMembre.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/ConsulterVolMembre.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="66" column="34" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VolService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Services/VolService.java">
+      <file leaf-file-name="LoginGUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI/LoginGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+              <caret line="85" column="141" selection-start-line="84" selection-start-column="20" selection-end-line="85" selection-end-column="141" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VolRepository.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Repository/VolRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20604914">
-              <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
-              <folding>
-                <marker date="1481553692000" expanded="true" signature="1470:1574" placeholder="insert into vol..." />
-                <marker date="1481553692000" expanded="true" signature="2499:2533" placeholder="select * fro..vol..." />
-                <marker date="1481553692000" expanded="true" signature="2990:3007" placeholder="SELECT * FRO..vol..." />
-                <marker date="1481553692000" expanded="true" signature="3524:3541" placeholder="SELECT * FRO..vol..." />
-                <marker date="1481553692000" expanded="true" signature="4784:4812" placeholder="delete from ..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Vol.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entities/Vol.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="86" column="5" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConsulterVolMembre.form" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/ConsulterVolMembre.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -211,20 +160,20 @@
       <list>
         <option value="$PROJECT_DIR$/src/Repository/AeroportRepository.java" />
         <option value="$PROJECT_DIR$/src/Services/AeroportService.java" />
-        <option value="$PROJECT_DIR$/src/Entities/Utilisateur.java" />
         <option value="$PROJECT_DIR$/src/Services/MembreEquipageService.java" />
         <option value="$PROJECT_DIR$/src/GUI/AdminFrame.java" />
         <option value="$PROJECT_DIR$/src/config/DataDB.java" />
-        <option value="$PROJECT_DIR$/src/Services/UtilisateurService.java" />
         <option value="$PROJECT_DIR$/src/GUI/LoginGUI.java" />
         <option value="$PROJECT_DIR$/src/GUI/ConsulterVolMembrePanel.java" />
         <option value="$PROJECT_DIR$/src/GUI/ConsulterVolMembre.form" />
         <option value="$PROJECT_DIR$/src/Services/VolService.java" />
-        <option value="$PROJECT_DIR$/src/GUI/MembreEquipageGui.java" />
-        <option value="$PROJECT_DIR$/src/Repository/UtilisateurRepository.java" />
         <option value="$PROJECT_DIR$/src/Repository/VolRepository.java" />
-        <option value="$PROJECT_DIR$/src/GUI/MembreEquipageGui.form" />
         <option value="$PROJECT_DIR$/src/GUI/ConsulterVolMembre.java" />
+        <option value="$PROJECT_DIR$/src/GUI/MembreEquipageGui.form" />
+        <option value="$PROJECT_DIR$/src/Entities/Utilisateur.java" />
+        <option value="$PROJECT_DIR$/src/Repository/UtilisateurRepository.java" />
+        <option value="$PROJECT_DIR$/src/Services/UtilisateurService.java" />
+        <option value="$PROJECT_DIR$/src/GUI/MembreEquipageGui.java" />
       </list>
     </option>
   </component>
@@ -365,6 +314,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirManager2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirManager2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Entities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -396,12 +367,14 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="238" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/GUI/images" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/GUI/images" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
@@ -898,12 +871,19 @@
       <created>1481536684823</created>
       <option name="number" value="Default" />
       <updated>1481536684823</updated>
-      <workItem from="1481536688518" duration="10995000" />
+      <workItem from="1481536688518" duration="15158000" />
     </task>
+    <task id="LOCAL-00001" summary="affichage des vols d'un membre">
+      <created>1481554125522</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1481554125522</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10995000" />
+    <option name="totallyTimeSpent" value="15158000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -915,11 +895,11 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18072289" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1702432" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -937,6 +917,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="affichage des vols d'un membre" />
+    <option name="LAST_COMMIT_MESSAGE" value="affichage des vols d'un membre" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -944,24 +928,6 @@
           <url>file://$PROJECT_DIR$/src/GUI/AdminFrame.java</url>
           <line>287</line>
           <properties />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Repository/VolRepository.java</url>
-          <line>145</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Repository/VolRepository.java</url>
-          <line>149</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Repository/VolRepository.java</url>
-          <line>157</line>
-          <properties />
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="9" />
@@ -999,8 +965,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
           <folding>
-            <element signature="e#512#513#0" expanded="true" />
-            <element signature="e#573#574#0" expanded="true" />
+            <element signature="e#512#513#0" expanded="false" />
+            <element signature="e#573#574#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1008,14 +974,6 @@
     <entry file="file://$PROJECT_DIR$/src/GUI/AdminFrame.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/UtilisateurService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/AeroportRepository.java">
@@ -1063,49 +1021,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/LoginGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="33" selection-start-line="41" selection-start-column="8" selection-end-line="48" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/ConsulterVolMembre.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/MembreEquipageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19848771">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entities/Vol.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="86" column="5" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/MembreEquipageGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="15" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entities/Utilisateur.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1115,17 +1034,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/UtilisateurRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding>
-            <marker date="1481553401000" expanded="true" signature="1406:1471" placeholder="SELECT * FRO..utilisateur..." />
-            <marker date="1481553401000" expanded="true" signature="2759:2840" placeholder="insert into utilisateur..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1139,24 +1047,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/MembreEquipageGui.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/ConsulterVolMembre.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="34" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/VolRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20604914">
+        <state vertical-scroll-proportion="0.0">
           <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
           <folding>
             <marker date="1481553692000" expanded="true" signature="1470:1574" placeholder="insert into vol..." />
@@ -1164,6 +1057,86 @@
             <marker date="1481553692000" expanded="true" signature="2990:3007" placeholder="SELECT * FRO..vol..." />
             <marker date="1481553692000" expanded="true" signature="3524:3541" placeholder="SELECT * FRO..vol..." />
             <marker date="1481553692000" expanded="true" signature="4784:4812" placeholder="delete from ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/LoginGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="141" selection-start-line="84" selection-start-column="20" selection-end-line="85" selection-end-column="141" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entities/Utilisateur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="46" selection-start-line="56" selection-start-column="46" selection-end-line="56" selection-end-column="46" />
+          <folding>
+            <element signature="e#1493#1494#0" expanded="true" />
+            <element signature="e#1541#1542#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/MembreEquipageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/MembreEquipageRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-44.88889">
+          <caret line="205" column="16" selection-start-line="205" selection-start-column="16" selection-end-line="205" selection-end-column="16" />
+          <folding>
+            <marker date="1481328929000" expanded="true" signature="1742:1797" placeholder="insert into membre..." />
+            <marker date="1481328929000" expanded="true" signature="2810:2832" placeholder="SELECT * FRO..membre..." />
+            <marker date="1481328929000" expanded="true" signature="3575:3613" placeholder="delete from ..." />
+            <marker date="1481328929000" expanded="true" signature="3968:4005" placeholder="select * fro..membre..." />
+            <marker date="1481328929000" expanded="true" signature="5696:5744" placeholder="delete from ..." />
+            <marker date="1481328929000" expanded="true" signature="6110:6180" placeholder="insert into membre_type_avion..." />
+            <marker date="1481328929000" expanded="true" signature="6635:6686" placeholder="select * fro..membre_type_avion..." />
+            <marker date="1481328929000" expanded="true" signature="7417:7472" placeholder="select * fro..membre_type_avion..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/MembreEquipageGui.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/UtilisateurRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="128" column="69" selection-start-line="128" selection-start-column="69" selection-end-line="128" selection-end-column="69" />
+          <folding>
+            <marker date="1481557483000" expanded="true" signature="1406:1471" placeholder="SELECT * FRO..utilisateur..." />
+            <marker date="1481557483000" expanded="true" signature="2759:2840" placeholder="insert into utilisateur..." />
+            <marker date="1481557483000" expanded="true" signature="3758:3820" placeholder="UPDATE utili..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/UtilisateurService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="38" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/MembreEquipageGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37576687">
+          <caret line="98" column="44" selection-start-line="98" selection-start-column="44" selection-end-line="98" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
