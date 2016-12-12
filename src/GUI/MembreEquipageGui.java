@@ -6,6 +6,7 @@ import Entities.Vol;
 import Services.UtilisateurService;
 import Enum.TypeUtilisateur;
 import Services.VolService;
+import config.EcritureLectureFichier;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -34,6 +35,7 @@ public class MembreEquipageGui extends JFrame{
     private JPasswordField oldPasswordField;
     private JButton sauvegarderButton;
     private JPasswordField newPasswordField;
+    private JButton exporterButton;
 
     private VolService volService = new VolService();
 
@@ -98,6 +100,12 @@ public class MembreEquipageGui extends JFrame{
                     oldPasswordField.setText("");
                     newPasswordField.setText("");
                 }
+            }
+        });
+        exporterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EcritureLectureFichier fichier = new EcritureLectureFichier(utilisateurCourant);
             }
         });
     }

@@ -10,13 +10,12 @@ import java.util.ArrayList;
  */
 public class EcritureLectureFichier {
 
-    private String nomFichier;
+    private String nomFichier = "listeVols.txt";
     private VolService volService = new VolService();
     private Utilisateur utilisateurCourant;
 
-    public EcritureLectureFichier(String nomFichier, Utilisateur utilisateur){
+    public EcritureLectureFichier(Utilisateur utilisateur){
 
-        this.nomFichier = nomFichier;
         this.utilisateurCourant = utilisateur;
 
         try {
