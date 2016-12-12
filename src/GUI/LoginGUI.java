@@ -50,6 +50,8 @@ public class LoginGUI extends JFrame{
 
         this.credentialPanel.setVisible(false);
 
+        //bouton par défaut pour appuyer sur entrer
+        this.getRootPane().setDefaultButton(this.seConnecterButton);
 
 
         retourButton.addActionListener(new ActionListener() {
