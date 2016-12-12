@@ -152,7 +152,7 @@
                 </constraints>
                 <properties>
                   <horizontalTextPosition value="0"/>
-                  <text value="Exporter"/>
+                  <text value="Exporter la liste des vols en .txt"/>
                 </properties>
               </component>
             </children>

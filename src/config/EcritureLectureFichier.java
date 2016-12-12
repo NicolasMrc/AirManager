@@ -10,13 +10,14 @@ import java.util.ArrayList;
  */
 public class EcritureLectureFichier {
 
-    private String nomFichier = "listeVols.txt";
+    private String nomFichier = "listeVols";
     private VolService volService = new VolService();
     private Utilisateur utilisateurCourant;
 
     public EcritureLectureFichier(Utilisateur utilisateur){
 
         this.utilisateurCourant = utilisateur;
+        this.nomFichier = this.nomFichier + "_" + this.utilisateurCourant.getUsername() + ".txt";
 
         try {
             FileOutputStream fos = new FileOutputStream(this.nomFichier);
@@ -34,7 +35,7 @@ public class EcritureLectureFichier {
                     String date = ", Date : " + vol.getDate();
                     String refAvion = ", Ref avion : " + vol.getAvion().getRef();
                     String pilote =  ", Pilote : " + vol.getEquipage().getPilote().getNom();
-                    String copilote = ", Copilote : " + vol.getEquipage().getCopilote().getNom() + ".";
+                    String copilote = ", Copilote : " + vol.getEquipage().getCopilote().getNom() + ". \n";
                     //on concatène les strings
                     Object[] objs = {numero, nomSite, nomDestination, date, refAvion, pilote, copilote};
                     //on ajoute une ligne dans le fichier
