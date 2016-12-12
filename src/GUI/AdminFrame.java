@@ -77,6 +77,11 @@ public class AdminFrame extends JFrame{
     private JComboBox avionVol;
     private JButton supprimerVolButton;
     private JButton ajouterVolButton;
+    private JPanel membres;
+    private JPanel typeAvions;
+    private JPanel vols;
+    private JPanel avions;
+    private JPanel adminMenu;
 
     /**
      * L'utilisateur courrant
@@ -116,7 +121,7 @@ public class AdminFrame extends JFrame{
      */
     public AdminFrame(Utilisateur utilisateur) throws HeadlessException {
 
-        this.setSize(new Dimension(700, 800));
+        this.setSize(new Dimension(1280, 720));
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
@@ -137,6 +142,12 @@ public class AdminFrame extends JFrame{
         this.typeNouveauMembre.addItem("Pilote");
         this.typeNouveauMembre.addItem("Copilote");
         this.typeNouveauMembre.addItem("Personnel non Commercial");
+
+
+         addPanelMouseListener(typeAvions, "typesAvion");
+         addPanelMouseListener(avions, "avions");
+         addPanelMouseListener(membres, "membresEquipage");
+         addPanelMouseListener(vols, "vols");
 
          addPanelMouseListener(supprimerMembrePanel, "supprimerMembre");
          addPanelMouseListener(SupprimerVolPanel, "supprimerVol");
@@ -214,7 +225,21 @@ public class AdminFrame extends JFrame{
         this.buttonPanel.setVisible(false);
         this.retourButton.setVisible(true);
         switch (section){
-            case "supprimerMembre" :
+            case "avions" :
+                this.adminMenu.setVisible(false);
+                break;
+            case "vols" :
+                this.adminMenu.setVisible(false);
+                break;
+            case "typesAvions" :
+                this.adminMenu.setVisible(false);
+                break;
+            case "membresEquipage" :
+                this.adminMenu.setVisible(false);
+                break;
+
+
+            /**case "supprimerMembre" :
 
                 this.titreLabel.setText("Supprimer un membre d'équipage");
                 this.suppressionSection.setVisible(true);
@@ -472,7 +497,7 @@ public class AdminFrame extends JFrame{
                 this.listeSupression.getViewport ().add (this.supressionTable);
                 this.pack();
                 break;
-        }
+        **/}
     }
 
 
