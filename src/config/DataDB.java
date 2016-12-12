@@ -1,8 +1,10 @@
 package config;
 
+import Entities.Aeroport;
 import Entities.Avion;
 import Entities.TypeAvion;
 import Repository.TypeAvionRepository;
+import Services.AeroportService;
 import Services.AvionService;
 import Services.MembreEquipageService;
 import Services.TypeAvionService;
@@ -19,15 +21,17 @@ public class DataDB {
     private TypeAvionService typeAvionService = new TypeAvionService();
     private AvionService avionService = new AvionService();
     private MembreEquipageService membreEquipageService = new MembreEquipageService();
+    private AeroportService aeroportService = new AeroportService();
     
     public static void main(String[] args){
         DataDB ddb = new DataDB();
     }
 
     public DataDB(){
-        this.createTypeAvion();
-        this.createAvion();
-        this.createMembre();
+        //this.createTypeAvion();
+        //this.createAvion();
+        //this.createMembre();
+        this.createAeroport();
     }
 
     public void createTypeAvion() {
@@ -94,6 +98,42 @@ public class DataDB {
         this.membreEquipageService.addMembreEquipage("Lei","Anibal", TypeMembreEquipage.PNC);
         this.membreEquipageService.addMembreEquipage("Cruze","Cathey", TypeMembreEquipage.PNC);
         this.membreEquipageService.addMembreEquipage("Grunewald","Hilario", TypeMembreEquipage.PNC);
+    }
+
+    public void createAeroport(){
+
+
+        this.aeroportService.save(new Aeroport("Atlanta","ATL"));
+        this.aeroportService.save(new Aeroport("Pékin", "PEK"));
+        this.aeroportService.save(new Aeroport("Dubaï", "DXB"));
+        this.aeroportService.save(new Aeroport("Chicago", "ORD"));
+        this.aeroportService.save(new Aeroport("Tokyo", "HND"));
+        this.aeroportService.save(new Aeroport("Londres", "LHR"));
+        this.aeroportService.save(new Aeroport("Los Angeles", "LAX"));
+        this.aeroportService.save(new Aeroport("Hong Kong", "HKG"));
+        this.aeroportService.save(new Aeroport("Paris-Charles-de-Gaulle", "CDG"));
+        this.aeroportService.save(new Aeroport("Dallas-Fort Worth", "DFW"));
+        this.aeroportService.save(new Aeroport("Istanbul", "IST"));
+        this.aeroportService.save(new Aeroport("Francfort", "FRA"));
+        this.aeroportService.save(new Aeroport("Shanghai-Pudong", "PVG"));
+        this.aeroportService.save(new Aeroport("Amsterdam", "AMS"));
+        this.aeroportService.save(new Aeroport("Soekarno-Hatta", "CGK"));
+        this.aeroportService.save(new Aeroport("New York-John F. Kennedy", "JFK"));
+        this.aeroportService.save(new Aeroport("Singapour", "SIN"));
+        this.aeroportService.save(new Aeroport("Canton Baiyun", "CAN"));
+        this.aeroportService.save(new Aeroport("Denver", "DEN"));
+        this.aeroportService.save(new Aeroport("Bangkok", "BKK"));
+        this.aeroportService.save(new Aeroport("San Francisco", "SFO"));
+        this.aeroportService.save(new Aeroport("Incheon", "ICN"));
+        this.aeroportService.save(new Aeroport("Kuala Lumpur", "KUL"));
+        this.aeroportService.save(new Aeroport("Madrid-Barajas", "MAD"));
+        this.aeroportService.save(new Aeroport("Indira-Gandhi", "DEL"));
+        this.aeroportService.save(new Aeroport("Las Vegas", "LAS"));
+        this.aeroportService.save(new Aeroport("Charlotte-Douglas", "CLT"));
+        this.aeroportService.save(new Aeroport("Miami", "MIA"));
+        this.aeroportService.save(new Aeroport("Phoenix", "PHX"));
+        this.aeroportService.save(new Aeroport("Chengdu-Shuangliu", "CTU"));
+        this.aeroportService.save(new Aeroport("Chengdu-Shuangliu", "CTU"));
     }
 
 }

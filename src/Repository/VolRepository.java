@@ -1,5 +1,6 @@
 package Repository;
 
+import Entities.Aeroport;
 import Entities.Avion;
 import Entities.Equipage;
 import Entities.Vol;
@@ -39,6 +40,8 @@ public class VolRepository {
 
     private EquipageRepository equipageRepository = new EquipageRepository();
 
+    private AeroportRepository aeroportRepository = new AeroportRepository();
+
     /**
      * constructeur vide initialisant la connexion avec la bdd
      */
@@ -61,13 +64,13 @@ public class VolRepository {
      */
     public Vol save(Vol vol){
 
-        String query = "insert into vol (numero, site, destination, date, id_avion, id_equipage) values (?, ?, ?, ?, ?, ?)";
+        String query = "insert into vol (numero, id_site, id_destination, date, id_avion, id_equipage) values (?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStmt = this.connexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setString (1, vol.getNumero());
-            preparedStmt.setString (2, vol.getSite());
-            preparedStmt.setString (3, vol.getDestination());
+            preparedStmt.setInt (2, vol.getSite().getId());
+            preparedStmt.setInt (3, vol.getDestination().getId());
             preparedStmt.setString (4, vol.getDate());
             preparedStmt.setInt (5, vol.getAvion().getId());
             preparedStmt.setInt (6, vol.getEquipage().getId());
@@ -153,14 +156,16 @@ public class VolRepository {
         try {
             int id = rs.getInt("id");
             String numero = rs.getString("numero");
-            String site = rs.getString("site");
-            String destination = rs.getString("destination");
+            int idSite = rs.getInt("id_site");
+            int idDestination = rs.getInt("id_destination");
             String date = rs.getString("date");
             int idAvion = rs.getInt("id_avion");
             int idEquipage = rs.getInt("id_equipage");
 
             Equipage equipage = this.equipageRepository.findOneById(idEquipage);
             Avion avion = this.avionRepository.findOneById(idAvion);
+            Aeroport site = this.aeroportRepository.findOneById(idSite);
+            Aeroport destination = this.aeroportRepository.findOneById(idDestination);
 
             return new Vol(id, numero, site, destination, date, avion, equipage);
 

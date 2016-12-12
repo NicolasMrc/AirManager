@@ -5,6 +5,7 @@ import Enum.TypeUtilisateur;
 import Exceptions.EmptyFieldException;
 import Services.*;
 
+import javax.print.attribute.standard.Destination;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -69,8 +70,8 @@ public class AdminFrame extends JFrame{
     private JButton sauvegarderQualificationButton;
     private JPanel creerVolSection;
     private JTextField numeroVol;
-    private JTextField siteVol;
-    private JTextField destinationVol;
+    private JComboBox siteVol;
+    private JComboBox destinationVol;
     private JTextField dateVol;
     private JComboBox piloteVol;
     private JComboBox copiloteVol;
@@ -107,6 +108,11 @@ public class AdminFrame extends JFrame{
      * Service de vol
      */
     private EquipageService equipageService = new EquipageService();
+
+    /**
+     * Service daeroport
+     */
+    private AeroportService aeroportService = new AeroportService();
 
     /**
      * constructeur du tableau d'administration
@@ -279,7 +285,7 @@ public class AdminFrame extends JFrame{
                 for(Vol vol: vols){
                     String pilote = vol.getEquipage().getPilote().getPrenom() + " " + vol.getEquipage().getPilote().getNom();
                     String copilote = vol.getEquipage().getCopilote().getPrenom() + " " + vol.getEquipage().getCopilote().getNom();
-                    Object[] objs = {vol.getId(), vol.getNumero(), vol.getSite(), vol.getDestination(), vol.getDate(), vol.getAvion().getRef(), pilote, copilote};
+                    Object[] objs = {vol.getId(), vol.getNumero(), vol.getSite().getNom(), vol.getDestination().getNom(), vol.getDate(), vol.getAvion().getRef(), pilote, copilote};
                     modelVol.addRow(objs);
                 }
 
@@ -292,6 +298,13 @@ public class AdminFrame extends JFrame{
             case "ajouterVol" :
                 this.titreLabel.setText("Ajouter un vol");
                 this.creerVolSection.setVisible(true);
+                this.siteVol.removeAllItems();
+                this.piloteVol.removeAllItems();
+                this.copiloteVol.removeAllItems();
+                this.destinationVol.removeAllItems();
+                this.avionVol.removeAllItems();
+                this.piloteVol.setEnabled(false);
+                this.copiloteVol.setEnabled(false);
 
                 this.avionVol.addItem(null);
 
@@ -299,34 +312,48 @@ public class AdminFrame extends JFrame{
                     this.avionVol.addItem(new ComboItem(avion.getRef(), String.valueOf(avion.getId())));
                 }
 
+                this.siteVol.addItem(null);
+                this.destinationVol.addItem(null);
+
+                for(Aeroport aeroport : this.aeroportService.findAll()){
+                    this.siteVol.addItem(new ComboItem(aeroport.getNom(), String.valueOf(aeroport.getId())));
+                    this.destinationVol.addItem(new ComboItem(aeroport.getNom(), String.valueOf(aeroport.getId())));
+                }
+
                 this.avionVol.addActionListener (new ActionListener () {
                     public void actionPerformed(ActionEvent e) {
                         piloteVol.setEnabled(true);
                         copiloteVol.setEnabled(true);
-                        Integer idAvion = Integer.valueOf(((ComboItem) avionVol.getSelectedItem()).getValue());
 
-                        Avion selectedAvion = avionService.findOneById(idAvion);
+                        if(avionVol.getSelectedItem() != null) {
+                            Integer idAvion = Integer.valueOf(((ComboItem) avionVol.getSelectedItem()).getValue());
+                            Avion selectedAvion = avionService.findOneById(idAvion);
 
-                        if(selectedAvion != null){
-                            piloteVol.removeAllItems();
-                            copiloteVol.removeAllItems();
+                            if(selectedAvion != null){
+                                piloteVol.removeAllItems();
+                                copiloteVol.removeAllItems();
 
-                            copiloteVol.addItem(null);
-                            piloteVol.addItem(null);
+                                copiloteVol.addItem(null);
+                                piloteVol.addItem(null);
 
-                            for(MembreEquipage copilote : membreEquipageService.findAllByMetierAndQualification(TypeMembreEquipage.COPILOTE, selectedAvion.getTypeAvion())){
-                                copiloteVol.addItem(new ComboItem(copilote.getPrenom() + " " + copilote.getNom(), String.valueOf(copilote.getId())));
+                                for(MembreEquipage copilote : membreEquipageService.findAllByMetierAndQualification(TypeMembreEquipage.COPILOTE, selectedAvion.getTypeAvion())){
+                                    copiloteVol.addItem(new ComboItem(copilote.getPrenom() + " " + copilote.getNom(), String.valueOf(copilote.getId())));
+                                }
+
+                                for(MembreEquipage pilote : membreEquipageService.findAllByMetierAndQualification(TypeMembreEquipage.PILOTE, selectedAvion.getTypeAvion())){
+                                    piloteVol.addItem(new ComboItem(pilote.getPrenom() + " " + pilote.getNom(), String.valueOf(pilote.getId())));
+                                }
+
                             }
-
-                            for(MembreEquipage pilote : membreEquipageService.findAllByMetierAndQualification(TypeMembreEquipage.PILOTE, selectedAvion.getTypeAvion())){
-                                piloteVol.addItem(new ComboItem(pilote.getPrenom() + " " + pilote.getNom(), String.valueOf(pilote.getId())));
-                            }
-
                         }
+
                     }
                 });
 
-                this.setPreferredSize(new Dimension(700, 350));
+
+                Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                this.setPreferredSize(new Dimension(1000, 350));
+                this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
                 this.pack();
                 break;
             case "supprimerTypeAvion" :
@@ -616,10 +643,10 @@ public class AdminFrame extends JFrame{
                 Integer idAvion = Integer.valueOf(((ComboItem) avionVol.getSelectedItem()).getValue());
                 Integer idPilote = Integer.valueOf(((ComboItem) piloteVol.getSelectedItem()).getValue());
                 Integer idCopilote = Integer.valueOf(((ComboItem) copiloteVol.getSelectedItem()).getValue());
+                Integer idSite = Integer.valueOf(((ComboItem) siteVol.getSelectedItem()).getValue());
+                Integer idDestination = Integer.valueOf(((ComboItem) destinationVol.getSelectedItem()).getValue());
 
                 String numVol = numeroVol.getText();
-                String site = siteVol.getText();
-                String destination = destinationVol.getText();
                 String date = dateVol.getText();
 
                 Avion avion = avionService.findOneById(idAvion);
@@ -627,24 +654,32 @@ public class AdminFrame extends JFrame{
                 try {
                     Pilote pilote = (Pilote)membreEquipageService.findOneById(idPilote);
                     Copilote copilote = (Copilote)membreEquipageService.findOneById(idCopilote);
+                    Aeroport site = aeroportService.findOneById(idSite);
+                    Aeroport destination = aeroportService.findOneById(idDestination);
                     //TODO liste de pnc
                     Equipage equipage = new Equipage(pilote, copilote, null);
 
                     equipage = equipageService.save(equipage);
 
                     if(avion != null && pilote != null && copilote != null  && equipage != null && !numVol.equals("")
-                            && !site.equals("") && !destination.equals("") && !date.equals("")){
+                            && site != null && destination != null && !date.equals("")){
                         Vol vol = new Vol(numVol, site, destination, date, avion, equipage);
                         volService.save(vol);
                     }
 
-                    siteVol.setText("");
-                    destinationVol.setText("");
                     numeroVol.setText("");
                     dateVol.setText("");
-                    avionVol.setSelectedItem(null);
+
+                    piloteVol.removeAllItems();
+                    piloteVol.addItem(null);
                     piloteVol.setSelectedItem(null);
+
+                    copiloteVol.removeAllItems();
+                    copiloteVol.addItem(null);
                     copiloteVol.setSelectedItem(null);
+
+                    piloteVol.setEnabled(false);
+                    copiloteVol.setEnabled(false);
 
                     creerVolSection.setVisible(false);
                     buttonPanel.setVisible(true);
