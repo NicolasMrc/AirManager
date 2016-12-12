@@ -70,6 +70,7 @@ public class UtilisateurRepository {
                 String usernameFromBdd = rs.getString("username");
                 String passwordFromBdd = rs.getString("password");
                 String roleFromBdd = rs.getString("role");
+                Integer idMembre = rs.getInt("id_membre");
 
                 TypeUtilisateur type;
 
@@ -81,12 +82,46 @@ public class UtilisateurRepository {
                     type = TypeUtilisateur.MEMBRE_EQUIPAGE;
                 }
 
-                return new Utilisateur(id, usernameFromBdd, passwordFromBdd, type);
+                if(idMembre != 0) {
+                    return new Utilisateur(id, usernameFromBdd, passwordFromBdd, type, idMembre);
+                } else {
+                    return new Utilisateur(id, usernameFromBdd, passwordFromBdd, type);
+                }
 
             }
         } catch (SQLException e ) {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public Utilisateur save(Utilisateur utilisateur){
+        String query = "insert into utilisateur (username, password, role, id_membre) values (?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setString (1, utilisateur.getUsername());
+            preparedStmt.setString (2, utilisateur.getPassword());
+
+            String role = "";
+
+            if(utilisateur.getTypeUtilisateur().equals(TypeUtilisateur.ADMIN)){
+                role = "admin";
+            } else if (utilisateur.getTypeUtilisateur().equals(TypeUtilisateur.MANAGER)){
+                role = "manager";
+            } else {
+                role = "membre";
+            }
+
+            preparedStmt.setString (3, role);
+            preparedStmt.setInt (4, utilisateur.getIdMembre());
+
+            preparedStmt.execute();
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+
     }
 }

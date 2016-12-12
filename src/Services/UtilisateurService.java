@@ -35,4 +35,9 @@ public class UtilisateurService {
             return null;
         }
     }
+
+    public Utilisateur save(String username, String password, TypeUtilisateur typeUtilisateur, int idMembre){
+        Utilisateur newUtilisateur = new Utilisateur(username, password, typeUtilisateur, idMembre);
+        return this.utilisateurRepository.save(newUtilisateur);
+    }
 }

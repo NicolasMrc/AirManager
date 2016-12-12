@@ -1,9 +1,6 @@
 package Repository;
 
-import Entities.Aeroport;
-import Entities.Avion;
-import Entities.Equipage;
-import Entities.Vol;
+import Entities.*;
 import config.BDDConfig;
 
 import java.sql.*;
@@ -122,6 +119,43 @@ public class VolRepository {
             }
 
             return vols;
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<Vol> findAllByMembreEquipage(int id){
+        String query = "SELECT * FROM vol";
+
+        try {
+
+            Statement stmt = this.connexion.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<Vol> vols = new ArrayList<>();
+
+            while (rs.next()) {
+                vols.add(this.mapResultSet(rs));
+            }
+
+            ArrayList<Vol> volsWithMembre = new ArrayList<>();
+
+            for(Vol vol : vols){
+                if(vol.getEquipage().getCopilote().getId() == id || vol.getEquipage().getPilote().getId() == id){
+                    volsWithMembre.add(vol);
+                }
+                if(vol.getEquipage().getPncs() != null && !vol.getEquipage().getPncs().isEmpty()){
+                    for(MembreEquipage membreEquipage : vol.getEquipage().getPncs()){
+                        if(membreEquipage.getId() == id){
+                            volsWithMembre.add(vol);
+                        }
+                    }
+                }
+            }
+
+            return volsWithMembre;
 
         } catch (SQLException e ) {
             System.out.println(e.getMessage());

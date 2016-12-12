@@ -39,7 +39,7 @@ public class MembreEquipageService {
         }
     }
 
-    public ArrayList<MembreEquipage> getMembres(){
+    public ArrayList<MembreEquipage> findAll(){
         return this.membreEquipageRepository.findAllMembres();
     }
 

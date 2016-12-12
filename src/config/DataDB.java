@@ -1,17 +1,13 @@
 package config;
 
-import Entities.Aeroport;
-import Entities.Avion;
-import Entities.TypeAvion;
+import Entities.*;
 import Repository.TypeAvionRepository;
-import Services.AeroportService;
-import Services.AvionService;
-import Services.MembreEquipageService;
-import Services.TypeAvionService;
+import Services.*;
 import Enum.TypeMembreEquipage;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+import Enum.TypeUtilisateur;
 
 /**
  * Created by Nico on 02/12/2016.
@@ -22,6 +18,7 @@ public class DataDB {
     private AvionService avionService = new AvionService();
     private MembreEquipageService membreEquipageService = new MembreEquipageService();
     private AeroportService aeroportService = new AeroportService();
+    private UtilisateurService utilisateurService = new UtilisateurService();
     
     public static void main(String[] args){
         DataDB ddb = new DataDB();
@@ -31,7 +28,8 @@ public class DataDB {
         //this.createTypeAvion();
         //this.createAvion();
         //this.createMembre();
-        this.createAeroport();
+        //this.createAeroport();
+        createUtilisateurMembre();
     }
 
     public void createTypeAvion() {
@@ -98,6 +96,14 @@ public class DataDB {
         this.membreEquipageService.addMembreEquipage("Lei","Anibal", TypeMembreEquipage.PNC);
         this.membreEquipageService.addMembreEquipage("Cruze","Cathey", TypeMembreEquipage.PNC);
         this.membreEquipageService.addMembreEquipage("Grunewald","Hilario", TypeMembreEquipage.PNC);
+    }
+
+    public void createUtilisateurMembre(){
+        ArrayList<MembreEquipage> membreEquipages = this.membreEquipageService.findAll();
+
+        for (MembreEquipage membreEquipage : membreEquipages){
+            this.utilisateurService.save(membreEquipage.getNom(), "password", TypeUtilisateur.MEMBRE_EQUIPAGE, membreEquipage.getId());
+        }
     }
 
     public void createAeroport(){

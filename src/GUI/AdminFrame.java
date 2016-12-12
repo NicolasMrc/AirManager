@@ -225,7 +225,7 @@ public class AdminFrame extends JFrame{
                 this.titreLabel.setText("Supprimer un membre d'équipage");
                 this.suppressionSection.setVisible(true);
                 this.setPreferredSize(new Dimension(700, 400));
-                ArrayList<MembreEquipage> membres = this.membreEquipageService.getMembres();
+                ArrayList<MembreEquipage> membres = this.membreEquipageService.findAll();
 
                 DefaultTableModel modelMembre = new DefaultTableModel();
 
@@ -395,7 +395,7 @@ public class AdminFrame extends JFrame{
                 this.titreLabel.setText("Qualifier un membre d'équipage");
                 this.qualificationSection.setVisible(true);
 
-                ArrayList<MembreEquipage> membresQualification = this.membreEquipageService.getMembres();
+                ArrayList<MembreEquipage> membresQualification = this.membreEquipageService.findAll();
 
                 DefaultTableModel modelMembrQualification = new DefaultTableModel();
 

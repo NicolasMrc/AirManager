@@ -15,6 +15,8 @@ public class VolService {
      */
     private VolRepository volRepository = new VolRepository();
 
+    private MembreEquipageService membreEquipageService = new MembreEquipageService();
+
     /**
      * sauvegarde le vol en base de donnée
      * @param vol
@@ -47,5 +49,16 @@ public class VolService {
      */
     public void delete(int id){
         this.volRepository.delete(id);
+    }
+
+    public ArrayList<Vol> findAllByMembreEquipage(int idMembre){
+        try {
+            if (this.membreEquipageService.findOneById(idMembre) != null) {
+                return this.volRepository.findAllByMembreEquipage(idMembre);
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
