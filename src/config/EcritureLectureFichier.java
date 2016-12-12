@@ -14,8 +14,13 @@ public class EcritureLectureFichier {
     private VolService volService = new VolService();
     private Utilisateur utilisateurCourant;
 
+    /**
+     * constructeur qui va créer un fichier avec les vols de l'utilisateur courant
+     * @param utilisateur : c'est l'utilisateur courant dont on doit mettre les vols dans le fichier
+     */
     public EcritureLectureFichier(Utilisateur utilisateur){
 
+        //on initialise le fichier avec le nom de l'utilisateur courant
         this.utilisateurCourant = utilisateur;
         this.nomFichier = this.nomFichier + "_" + this.utilisateurCourant.getUsername() + ".txt";
 
@@ -23,6 +28,7 @@ public class EcritureLectureFichier {
             FileOutputStream fos = new FileOutputStream(this.nomFichier);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
+            //on récupère la liste des vols de l'utilisateur courant
             ArrayList<Vol> vols = this.volService.findAllByMembreEquipage(this.utilisateurCourant.getIdMembre());
 
             //si la liste de vol n'est pas nule on ajoute tous les vols dans le fichier
