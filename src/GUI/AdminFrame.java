@@ -279,13 +279,9 @@ public class AdminFrame extends JFrame{
                 modelVol.addColumn("Destination");
                 modelVol.addColumn("Date");
                 modelVol.addColumn("Avion");
-                modelVol.addColumn("Pilote");
-                modelVol.addColumn("Copilote");
 
                 for(Vol vol: vols){
-                    String pilote = vol.getEquipage().getPilote().getPrenom() + " " + vol.getEquipage().getPilote().getNom();
-                    String copilote = vol.getEquipage().getCopilote().getPrenom() + " " + vol.getEquipage().getCopilote().getNom();
-                    Object[] objs = {vol.getId(), vol.getNumero(), vol.getSite().getNom(), vol.getDestination().getNom(), vol.getDate(), vol.getAvion().getRef(), pilote, copilote};
+                    Object[] objs = {vol.getId(), vol.getNumero(), vol.getSite().getNom(), vol.getDestination().getNom(), vol.getDate(), vol.getAvion().getRef()};
                     modelVol.addRow(objs);
                 }
 

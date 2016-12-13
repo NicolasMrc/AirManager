@@ -1,11 +1,10 @@
 package Repository;
 
-import Entities.Copilote;
-import Entities.Equipage;
-import Entities.Pilote;
+import Entities.*;
 import config.BDDConfig;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by Nico on 10/12/2016.
@@ -124,11 +123,77 @@ public class EquipageRepository {
             Pilote pilote = (Pilote)this.membreEquipageRepository.findOneById(idPilote);
             Copilote copilote = (Copilote)this.membreEquipageRepository.findOneById(idCopilote);
 
-            return new Equipage(id, pilote,copilote, null);
+            ArrayList<PNC> pncs = this.findPNC(id);
+
+            return new Equipage(id, pilote,copilote, pncs);
 
         } catch (SQLException e ) {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public void addPNC(int idEquipage, int idPNC){
+        String query = "insert into equipage_pnc (id_equipage, id_pnc) values (?, ?)";
+
+        try {
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt (1, idEquipage);
+            preparedStmt.setInt (2, idPNC);
+
+            preparedStmt.execute();
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public ArrayList<PNC> findPNC(int idEquipage){
+        try {
+            String query = "select * from equipage_pnc e where e.id_equipage = ?";
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt(1, idEquipage);
+            ResultSet rs = preparedStmt.executeQuery();
+
+            ArrayList<PNC> pncs = new ArrayList<>();
+
+            while(rs.next()) {
+                pncs.add((PNC)this.membreEquipageRepository.findOneById(rs.getInt("id_pnc")));
+            }
+
+            return pncs;
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public void removePNC(int idEquipage, int idPNC){
+        String query = "DELETE FROM equipage_pnc WHERE id_equipage = ? AND id_pnc = ?";
+
+        try {
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt (1, idEquipage);
+            preparedStmt.setInt (2, idPNC);
+
+            preparedStmt.execute();
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void update(Equipage equipage){
+        String query = "UPDATE equipage SET id_pilote = ?, id_copilote = ? WHERE id = ?";
+
+        try {
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+            preparedStmt.setInt (1, equipage.getPilote().getId());
+            preparedStmt.setInt (2, equipage.getCopilote().getId());
+            preparedStmt.setInt (3, equipage.getId());
+
+            preparedStmt.execute();
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
     }
 }

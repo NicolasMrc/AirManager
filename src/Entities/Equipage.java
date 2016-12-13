@@ -65,4 +65,12 @@ public class Equipage {
     public int getId() {
         return id;
     }
+
+    public void setPilote(Pilote pilote) {
+        this.pilote = pilote;
+    }
+
+    public void setCopilote(Copilote copilote) {
+        this.copilote = copilote;
+    }
 }

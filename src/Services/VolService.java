@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.MembreEquipage;
 import Entities.Vol;
 import Repository.VolRepository;
 
@@ -39,6 +40,11 @@ public class VolService {
      */
     public ArrayList<Vol> findAll(){
         return this.volRepository.findAll();
+    }
+
+
+    public Vol findOneById(int id){
+        return this.volRepository.findOneById(id);
     }
 
     /**

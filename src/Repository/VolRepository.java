@@ -208,4 +208,20 @@ public class VolRepository {
         }
         return null;
     }
+
+    public void addPNC(int idEquipage, int idPNC){
+        String query = "insert into equipage_pnc (id_membre_pnc, id_equipage) values (?, ?)";
+
+        try {
+            PreparedStatement preparedStmt = this.connexion.prepareStatement(query);
+
+            preparedStmt.setInt (1, idPNC);
+            preparedStmt.setInt (2, idEquipage);
+
+            preparedStmt.execute();
+
+        } catch (SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

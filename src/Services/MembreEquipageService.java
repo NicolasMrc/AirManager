@@ -19,13 +19,6 @@ public class MembreEquipageService {
     public void addMembreEquipage(String nom, String prenom, TypeMembreEquipage typeMembreEquipage){
         if(!prenom.isEmpty() && !nom.isEmpty() && typeMembreEquipage != null ){
             ArrayList<TypeAvion> qualifications = new ArrayList<>();
-            try {
-                //TODO supprimer ca et faire l'ajout de qualification dynaiquement
-                qualifications.add(typeAvionService.findOneById(10));
-                qualifications.add(typeAvionService.findOneById(12));
-            } catch (Exception e){
-
-            }
             if (typeMembreEquipage.equals(TypeMembreEquipage.PILOTE)){
                 Pilote pilote = new Pilote(prenom, nom, qualifications);
                 this.membreEquipageRepository.save(pilote);
@@ -36,6 +29,7 @@ public class MembreEquipageService {
                 PNC pnc = new PNC(prenom, nom, qualifications);
                 this.membreEquipageRepository.save(pnc);
             }
+            //TODO creer un utilisateur avec l'id du membre
         }
     }
 

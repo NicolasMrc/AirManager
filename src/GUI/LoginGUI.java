@@ -73,7 +73,7 @@ public class LoginGUI extends JFrame{
                     if(user.getTypeUtilisateur().equals(TypeUtilisateur.ADMIN)){
                         AdminFrame adminFrame = new AdminFrame(user);
                     } else if (user.getTypeUtilisateur().equals(TypeUtilisateur.MANAGER)){
-                        //ManagerFrame managerFrame = new ManagerFrame();
+                        ManagerGUI managerGUI = new ManagerGUI(user);
                     } else if (user.getTypeUtilisateur().equals(TypeUtilisateur.MEMBRE_EQUIPAGE)){
                         MembreEquipageGui membreEquipageFrame = new MembreEquipageGui(user);
                     }
