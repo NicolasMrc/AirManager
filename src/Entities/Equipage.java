@@ -91,6 +91,15 @@ public class Equipage {
     }
 
     /**
+     * remplace le pilote
+     * @param pilote
+     *      le pilote a ajouter
+     */
+    public void replacePilote(Pilote pilote){
+        this.pilote = pilote;
+    }
+
+    /**
      * permet d'ajouter un copilote a l'equipage
      * @param copilote
      *      le copilote a ajouter
