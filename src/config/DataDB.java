@@ -10,20 +10,47 @@ import java.util.concurrent.ThreadLocalRandom;
 import Enum.TypeUtilisateur;
 
 /**
+ * classe permettant de peupler la base de donnée
  * Created by Nico on 02/12/2016.
  */
 public class DataDB {
 
+    /**
+     * service de type avion
+     */
     private TypeAvionService typeAvionService = new TypeAvionService();
+
+    /**
+     * Service de la classe Avion
+     */
     private AvionService avionService = new AvionService();
+
+    /**
+     * Service de la classe membre equipage
+     */
     private MembreEquipageService membreEquipageService = new MembreEquipageService();
+
+    /**
+     * Service de la classe aeroport
+     */
     private AeroportService aeroportService = new AeroportService();
+
+    /**
+     * Service de la classe utilisateur
+     */
     private UtilisateurService utilisateurService = new UtilisateurService();
-    
+
+    /**
+     * main permettant de lancer la population de la base de donnée
+     * @param args
+     */
     public static void main(String[] args){
         DataDB ddb = new DataDB();
     }
 
+    /**
+     * constructeur data
+     */
     public DataDB(){
         //this.createTypeAvion();
         //this.createAvion();
@@ -32,6 +59,9 @@ public class DataDB {
         createUtilisateurMembre();
     }
 
+    /**
+     * permet de creer en base des type avion
+     */
     public void createTypeAvion() {
 
         TypeAvionRepository typeAvionRepository = new TypeAvionRepository();
@@ -62,6 +92,9 @@ public class DataDB {
         }
     }
 
+    /**
+     * permet de creer des avion
+     */
     public void createAvion(){
         for (int i = 0 ; i <= 2 ; i++) {
             for (TypeAvion typeAvion : this.typeAvionService.findAll()) {
@@ -71,6 +104,9 @@ public class DataDB {
         }
     }
 
+    /**
+     * permet de creer le membre
+     */
     public void createMembre(){
         this.membreEquipageService.addMembreEquipage("Blériot","Louis", TypeMembreEquipage.PILOTE);
         this.membreEquipageService.addMembreEquipage("Farman", "Henri", TypeMembreEquipage.PILOTE);
@@ -98,6 +134,10 @@ public class DataDB {
         this.membreEquipageService.addMembreEquipage("Grunewald","Hilario", TypeMembreEquipage.PNC);
     }
 
+
+    /**
+     * permet de creer des utilisateur pour les membres
+     */
     public void createUtilisateurMembre(){
         ArrayList<MembreEquipage> membreEquipages = this.membreEquipageService.findAll();
 
@@ -106,9 +146,11 @@ public class DataDB {
         }
     }
 
+    /**
+     * permet de creer des aeroport en base
+     *
+     */
     public void createAeroport(){
-
-
         this.aeroportService.save(new Aeroport("Atlanta","ATL"));
         this.aeroportService.save(new Aeroport("Pékin", "PEK"));
         this.aeroportService.save(new Aeroport("Dubaï", "DXB"));

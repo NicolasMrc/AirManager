@@ -420,6 +420,12 @@
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13416599"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-1"/>
+              <icon value="GUI/images/plusIcon.png"/>
+              <opaque value="true"/>
               <text value="Ajouter"/>
             </properties>
           </component>
@@ -505,6 +511,12 @@
               <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13416599"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-1"/>
+              <icon value="GUI/images/trashIcon.png"/>
+              <opaque value="true"/>
               <text value="Supprimer"/>
             </properties>
           </component>
@@ -513,6 +525,12 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13416599"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-1"/>
+              <icon value="GUI/images/trashIcon.png"/>
+              <opaque value="true"/>
               <text value="Supprimer"/>
             </properties>
           </component>
@@ -521,6 +539,12 @@
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13416599"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-1"/>
+              <icon value="GUI/images/trashIcon.png"/>
+              <opaque value="true"/>
               <text value="Supprimer"/>
             </properties>
           </component>
@@ -529,6 +553,12 @@
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13416599"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-1"/>
+              <icon value="GUI/images/trashIcon.png"/>
+              <opaque value="true"/>
               <text value="Supprimer"/>
             </properties>
           </component>
@@ -610,6 +640,12 @@
                   <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-13416599"/>
+                  <borderPainted value="false"/>
+                  <focusPainted value="false"/>
+                  <foreground color="-1"/>
+                  <icon value="GUI/images/plusIcon.png"/>
+                  <opaque value="true"/>
                   <text value="Ajouter"/>
                 </properties>
               </component>
@@ -658,6 +694,12 @@
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13416599"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-1"/>
+              <icon value="GUI/images/plusIcon.png"/>
+              <opaque value="true"/>
               <text value="Ajouter"/>
             </properties>
           </component>
@@ -730,6 +772,12 @@
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-13416599"/>
+                  <borderPainted value="false"/>
+                  <focusPainted value="false"/>
+                  <foreground color="-1"/>
+                  <icon value="GUI/images/saveIcon.png"/>
+                  <opaque value="true"/>
                   <text value="Sauvegarder"/>
                 </properties>
               </component>
@@ -902,6 +950,12 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-13416599"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-1"/>
+              <icon value="GUI/images/plusIcon.png"/>
+              <opaque value="true"/>
               <text value="Ajouter"/>
             </properties>
           </component>

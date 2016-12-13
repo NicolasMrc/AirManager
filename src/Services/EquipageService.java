@@ -60,7 +60,7 @@ public class EquipageService {
     public void updatePilote(Equipage equipage, int idPilote){
         try {
             Pilote pilote = (Pilote) membreEquipageService.findOneById(idPilote);
-            equipage.setPilote(pilote);
+            equipage.addPilote(pilote);
             this.equipageRepository.update(equipage);
         } catch (Exception e){
             System.out.println(e.getMessage());
@@ -70,7 +70,7 @@ public class EquipageService {
     public void updateCopilote(Equipage equipage, int idCopilote){
         try {
             Copilote copilote = (Copilote) membreEquipageService.findOneById(idCopilote);
-            equipage.setCopilote(copilote);
+            equipage.addCopilote(copilote);
             this.equipageRepository.update(equipage);
         } catch (Exception e){
             System.out.println(e.getMessage());
