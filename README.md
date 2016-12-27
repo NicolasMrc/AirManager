@@ -12,7 +12,6 @@ Les utilisateurs de l'application sont classé en trois groupes
  - Managers : peuvent assigner une équipage aux vols déjà existants, un équipage contient un pilote, un copilote et un nombre de Personnel Non Commercial variable (qui dépend du type d'avion utilisé pour le vol).
  - Membre d'équipage : peuvent visualiser les vols sur lesquelles ils ont été assignés.
 
-----------
 
 
 <i class="icon-eye"></i> Respect des consignes
@@ -54,12 +53,10 @@ L'application est découpée en 4 interfaces :
 
 Le point de départ de l'application est l'interface de login, puis l'utilisateur pourra accéder aux autres interface en s'authentifiant avec son nom d'utilisateur et son mot de passe.
 
-----------
 
 <i class="icon-picture"></i> Screenshots
 -------------
 
-----------
 
 <i class="icon-download"></i> Installation
 -------------
