@@ -31,10 +31,15 @@ public class TypeAvionService implements ServiceInterface<TypeAvion>{
      */
     public TypeAvion addTypeAvion(String nom, Integer nbPNCMin, Integer nbPNCMax) throws EmptyFieldException{
         if(!nom.isEmpty() && nbPNCMax != null && nbPNCMin != null) {
-            return this.typeAvionRepository.save(new TypeAvion(nom, nbPNCMin, nbPNCMax));
+            return this.save(new TypeAvion(nom, nbPNCMin, nbPNCMax));
         } else {
             throw new EmptyFieldException();
         }
+    }
+
+    @Override
+    public TypeAvion save(TypeAvion typeAvion){
+        return this.typeAvionRepository.save(typeAvion);
     }
 
     @Override
