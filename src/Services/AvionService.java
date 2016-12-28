@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Service de la classe Avion
  * Created by Nico on 30/11/2016.
  */
-public class AvionService {
+public class AvionService implements ServiceInterface<Avion>{
 
     /**
      * Repository de la classe Avion
@@ -32,29 +32,25 @@ public class AvionService {
         }
     }
 
-    /**
-     * permet de supprimer un avion a partir d'un id
-     * @param id
-     *      l'id de l'avion a supprimer
-     */
+    @Override
+    public Avion save(Avion avion){
+        return this.avionRepository.save(avion);
+    }
+
+    @Override
     public void delete(int id){
         if(id != -1){
             this.avionRepository.delete(id);
         }
     }
 
+    @Override
     public ArrayList<Avion> findAll(){
         return this.avionRepository.findAll();
     }
 
-    /**
-     * retourne un avion par son id
-     * @param id
-     *      l'id
-     * @return
-     *      l'avion
-     */
-    public Avion findOneById(int id){
+    @Override
+    public Avion findOneById(Integer id){
         return this.avionRepository.findOneById(id);
     }
 }

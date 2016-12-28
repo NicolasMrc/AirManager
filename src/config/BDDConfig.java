@@ -6,9 +6,14 @@ package config;
  */
 public class BDDConfig {
     /**
+     * port
+     */
+    public String port = "8889";
+
+    /**
      * url de connexion a la bdd
      */
-    public String url = "jdbc:mysql://localhost:8889/airmanager";
+    public String url = "jdbc:mysql://localhost:";
 
     /**
      * username de la bdd
@@ -21,12 +26,17 @@ public class BDDConfig {
     public String motDePasse = "root";
 
     /**
+     * nom de la base
+     */
+    public String nomBDD = "airmanager";
+
+    /**
      * retourne l'url de connexion en bdd
      * @return
      *  l'url
      */
     public String getUrl() {
-        return url;
+        return url + port + "/" + nomBDD;
     }
 
     /**

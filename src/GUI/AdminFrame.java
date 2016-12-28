@@ -5,7 +5,6 @@ import Enum.TypeUtilisateur;
 import Exceptions.EmptyFieldException;
 import Services.*;
 
-import javax.print.attribute.standard.Destination;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,13 +15,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.Exchanger;
 
 import Enum.TypeMembreEquipage;
 
+//TODO :refactor cette classe en utilisant les cardlayout
+
 /**
+ * Interface graphique de la vue administrateur
  * Created by Nico on 29/11/2016.
  */
 public class AdminFrame extends JFrame{
@@ -725,6 +724,11 @@ public class AdminFrame extends JFrame{
         });
     }
 
+    /**
+     * retourne l'id de la ligne selectionnée dans le tablea
+     * @return
+     *      l'id selectionné
+     */
     public int getIdSelectedRow(){
         int selectedRow = supressionTable.getSelectedRow();
         try{
@@ -737,6 +741,9 @@ public class AdminFrame extends JFrame{
         return -1;
     }
 
+    /**
+     * supprimer une ligne de tableau selectionnée
+     */
     public void deleteSelectedRow(){
         int selectedRow = supressionTable.getSelectedRow();
         ((DefaultTableModel) supressionTable.getModel()).removeRow(selectedRow);

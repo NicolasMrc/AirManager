@@ -23,6 +23,7 @@ import Services.VolService;
 import Enum.TypeMembreEquipage;
 
 /**
+ * classe de l'interface graphique du manager
  * Created by Nico on 12/12/2016.
  */
 public class ManagerGUI extends JFrame{
@@ -50,16 +51,36 @@ public class ManagerGUI extends JFrame{
     private JButton supprimerButton;
     private JScrollPane pncScrollPanel;
 
+    /**
+     * service d'utilisateur
+     */
     private UtilisateurService utilisateurService = new UtilisateurService();
 
+    /**
+     * l'utilisateur connecté
+     */
     private Utilisateur utilisateurCourant;
 
+    /**
+     * le service de vol
+     */
     private VolService volService = new VolService();
 
+    /**
+     * le service de membre d'equipage
+     */
     private MembreEquipageService membreEquipageService = new MembreEquipageService();
 
+    /**
+     * le service d'equipage
+     */
     private EquipageService equipageService = new EquipageService();
 
+    /**
+     * permet d'initialiser les composant de la vue lors de son affichage
+     * @param utilisateurCourant
+     *      l'utilisateur connecté
+     */
     public ManagerGUI(Utilisateur utilisateurCourant){
 
         this.utilisateurCourant = utilisateurCourant;
@@ -81,11 +102,15 @@ public class ManagerGUI extends JFrame{
         this.loadVols();
 
         this.addListener();
-
-
-
     }
 
+    /**
+     * permet d'ajouter les mouseLisntener aux labels
+     * @param label
+     *      le label auquel ajouté le mouseListener
+     * @param card
+     *      la carte a afficher au click sur le jlabel
+     */
     public void addMouseListenerToLabel(JLabel label, String card){
         label.addMouseListener(new MouseAdapter() {
             @Override
@@ -120,6 +145,11 @@ public class ManagerGUI extends JFrame{
         });
     }
 
+    /**
+     * permet le changement de cartes sur l'affichage
+     * @param card
+     *      la carte a afficher
+     */
     public void changeCard(String card){
         if(card.equals("gestionCard")){
             this.setSize(new Dimension(800, 270));
@@ -128,12 +158,9 @@ public class ManagerGUI extends JFrame{
         cl.show(this.cardPanel, card);
     }
 
-    public static void main(String[] args){
-        UtilisateurService utilisateurService = new UtilisateurService();
-        Utilisateur utilisateur = utilisateurService.connexion("manager", "manager", TypeUtilisateur.MANAGER);
-        ManagerGUI managerGUI = new ManagerGUI(utilisateur);
-    }
-
+    /**
+     * permet de charger les vols
+     */
     public void loadVols(){
         ArrayList<Vol> vols = this.volService.findAll();
 
@@ -158,6 +185,9 @@ public class ManagerGUI extends JFrame{
         this.volScrollPane.getViewport ().add (this.volTable);
     }
 
+    /**
+     * permet d'ajouter les listener sur les boutons de l'interface manager
+     */
     public void addListener(){
         this.volTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent event) {
@@ -359,5 +389,17 @@ public class ManagerGUI extends JFrame{
             }
         });
 
+    }
+
+
+    /**
+     * permet de lancer directement la vue du manager sans passer par le login
+     * @param args
+     *      les arguments
+     */
+    public static void main(String[] args){
+        UtilisateurService utilisateurService = new UtilisateurService();
+        Utilisateur utilisateur = utilisateurService.connexion("manager", "manager", TypeUtilisateur.MANAGER);
+        ManagerGUI managerGUI = new ManagerGUI(utilisateur);
     }
 }

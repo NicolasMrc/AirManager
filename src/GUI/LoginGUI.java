@@ -12,6 +12,7 @@ import Entities.Utilisateur;
 import Services.UtilisateurService;
 
 /**
+ * la classe gerant l'interface graphique du login
  * Created by Nico on 28/11/2016.
  */
 public class LoginGUI extends JFrame{
@@ -25,11 +26,20 @@ public class LoginGUI extends JFrame{
     private JPasswordField passwordField;
     private JButton seConnecterButton;
     private JButton retourButton;
+
+    /**
+     * le type d'utilisateur pour la connection
+     */
     private TypeUtilisateur typeUtilisateur;
 
-
+    /**
+     * le service d'utilisateur
+     */
     private UtilisateurService utilisateurService = new UtilisateurService();
 
+    /**
+     * defini les elements de la vue
+     */
     public LoginGUI(){
 
         addPanelMouseListener(this.adminPanel, TypeUtilisateur.ADMIN);
@@ -48,7 +58,9 @@ public class LoginGUI extends JFrame{
         this.credentialPanel.setVisible(false);
 
 
-
+        /**
+         * ajoute un actionListener sur le bouton retour
+         */
         retourButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,6 +73,9 @@ public class LoginGUI extends JFrame{
             }
         });
 
+        /**
+         * ajout d'un actionListener sur le bouton Connexion
+         */
         seConnecterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,6 +102,13 @@ public class LoginGUI extends JFrame{
         });
     }
 
+    /**
+     * ajout des mouseListener sur les panel de choix de type utilisateur pour la connexion
+     * @param panel
+     *      le panel sur lequel ajouter le mouseListener
+     * @param type
+     *      le type d'utilisateur
+     */
     public void addPanelMouseListener(JPanel panel, TypeUtilisateur type){
 
         panel.addMouseListener(new MouseAdapter() {
@@ -123,6 +145,10 @@ public class LoginGUI extends JFrame{
         });
     }
 
+    /**
+     * permet de lancer l'interface de connexion
+     * @param args
+     */
     public static void main(String[] args){
         new LoginGUI();
     }

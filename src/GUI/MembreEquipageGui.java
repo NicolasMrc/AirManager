@@ -17,11 +17,16 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 /**
+ * classe de l'interface graphique des membre d'equipage
  * Created by Nico on 12/12/2016.
  */
 public class MembreEquipageGui extends JFrame{
 
+    /**
+     * l'utilisateur courant
+     */
     private Utilisateur utilisateurCourant;
+
     private JPanel mainPanel;
     private JLabel consulterVolLabel;
     private JLabel gestionCompteLabel;
@@ -35,10 +40,21 @@ public class MembreEquipageGui extends JFrame{
     private JButton sauvegarderButton;
     private JPasswordField newPasswordField;
 
+    /**
+     * le service de vol
+     */
     private VolService volService = new VolService();
 
+    /**
+     * le service d'utilisateur
+     */
     private UtilisateurService utilisateurService = new UtilisateurService();
 
+    /**
+     * constructeur permettant d'initialiser les composant de la vue
+     * @param utilisateur
+     *      l'utilisateur connecté
+     */
     public MembreEquipageGui(Utilisateur utilisateur){
         this.utilisateurCourant = utilisateur;
 
@@ -104,6 +120,13 @@ public class MembreEquipageGui extends JFrame{
         });
     }
 
+    /**
+     * ajout des mouseListener sur les labels de la vue
+     * @param label
+     *      le label sur lequel ajouter le listener
+     * @param card
+     *      la carte a afficher au click sur le label
+     */
     public void addMouseListenerToLabel(JLabel label, String card){
         label.addMouseListener(new MouseAdapter() {
             @Override
@@ -138,6 +161,11 @@ public class MembreEquipageGui extends JFrame{
         });
     }
 
+    /**
+     * ajout des listener sur les click des boutons
+     * @param button
+     *      le bouton sur lequel ajouter le listener
+     */
     public void addMouseListenerToButton(JButton button){
         button.addMouseListener(new MouseAdapter() {
             @Override
@@ -170,6 +198,11 @@ public class MembreEquipageGui extends JFrame{
         });
     }
 
+    /**
+     * permet de changer de carte
+     * @param card
+     *      la carte a afficher
+     */
     public void changeCard(String card){
         if(card.equals("gestionCard")){
             this.setSize(new Dimension(800, 270));
@@ -178,12 +211,10 @@ public class MembreEquipageGui extends JFrame{
         cl.show(this.cardPanel, card);
     }
 
-    public static void main(String[] args){
-        UtilisateurService utilisateurService = new UtilisateurService();
-        Utilisateur utilisateur = utilisateurService.connexion("Boucher", "password", TypeUtilisateur.MEMBRE_EQUIPAGE);
-        MembreEquipageGui membreEquipageGui = new MembreEquipageGui(utilisateur);
-    }
 
+    /**
+     * permet de charger les vols du membre d'equipage concerné
+     */
     public void loadVolsMembre(){
         ArrayList<Vol> vols = this.volService.findAllByMembreEquipage(this.utilisateurCourant.getIdMembre());
 
@@ -209,5 +240,16 @@ public class MembreEquipageGui extends JFrame{
         this.volTable = new JTable(modelVol);
         this.volScrollPane.setLayout(new ScrollPaneLayout());
         this.volScrollPane.getViewport ().add (this.volTable);
+    }
+
+    /**
+     * permet de lancer la vue de membre d'equipage sans passer par le login
+     * @param args
+     *      les arguments
+     */
+    public static void main(String[] args){
+        UtilisateurService utilisateurService = new UtilisateurService();
+        Utilisateur utilisateur = utilisateurService.connexion("Boucher", "password", TypeUtilisateur.MEMBRE_EQUIPAGE);
+        MembreEquipageGui membreEquipageGui = new MembreEquipageGui(utilisateur);
     }
 }

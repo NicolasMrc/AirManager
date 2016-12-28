@@ -1,15 +1,15 @@
 package Services;
 
-import Entities.MembreEquipage;
 import Entities.Vol;
 import Repository.VolRepository;
 
 import java.util.ArrayList;
 
 /**
+ * Service de vol
  * Created by Nico on 10/12/2016.
  */
-public class VolService {
+public class VolService implements ServiceInterface<Vol>{
 
     /**
      * Repository de la classe Avion
@@ -33,26 +33,17 @@ public class VolService {
         }
     }
 
-    /**
-     * renvoi tout les vol sauvegarder en base de donnée
-     * @return
-     *      la liste de tout les vols
-     */
+    @Override
     public ArrayList<Vol> findAll(){
         return this.volRepository.findAll();
     }
 
-
-    public Vol findOneById(int id){
+    @Override
+    public Vol findOneById(Integer id){
         return this.volRepository.findOneById(id);
     }
 
-    /**
-     * supprime un vol en base de donnée
-     * @param id
-     *  l'id du vol a supprimer
-     *
-     */
+    @Override
     public void delete(int id){
         this.volRepository.delete(id);
     }
