@@ -39,7 +39,8 @@ Deux types de persistances sont employées dans l'application :
 
 - Toutes les données de l'application sont sauvegardées automatiquement en **base de donnée** lors de chaque modification sur une entitée.
 - Les membres peuvent exporter dans un fichier le tableau des vols grâce a la **serialization** (on peut imaginer que d'implementer plus tard une fonctionnalité d'importation a partir de fichier serialiser grace a ce mechanimse)'.
-- Les membres d'equipage peuvent exporter les vols sur lesquels ils sont assigné, cela créer un fichier html souvrant dans le navigateur de l'utilisateur contenant un tableau de vol
+- Les membres d'equipage peuvent exporter les vols sur lesquels ils sont assigné, cela créer un fichier html souvrant dans le navigateur de l'utilisateur contenant un tableau de vol tel que celui ci :
+[![Vol](http://i.imgur.com/btje2Hf.png)](http://i.imgur.com/btje2Hf.png)
 
 #### <i class="icon-refresh"></i> **Interface Graphique**
 
@@ -47,23 +48,16 @@ Nous avons pris soin de réaliser de belles interfaces graphiques afin de facili
 
 L'application est découpée en 4 interfaces :
 
-- L'interface de Login
-- Le portail Administrateur
-- Le portail Manager
-- Le portail Membre d'équipage
+#####L'interface de Login
+[![Administration](http://i.imgur.com/wjqEZbC.png)](http://i.imgur.com/wjqEZbC.png)
+#####Le portail Administrateur
+[![Administration](http://i.imgur.com/36tgqLo.png)](http://i.imgur.com/36tgqLo.png)
+#####Le portail Manager
+[![Portail Manager](http://i.imgur.com/nfCykkw.png)](http://i.imgur.com/nfCykkw.png)
+#####Le portail Membre d'équipage
+[![Portail Membre](http://i.imgur.com/uvPVIsY.png)](http://i.imgur.com/uvPVIsY.png)
 
 Le point de départ de l'application est l'interface de login, puis l'utilisateur pourra accéder aux autres interface en s'authentifiant avec son nom d'utilisateur et son mot de passe.
-
-
-<i class="icon-picture"></i> Screenshots
--------------
-
-[![Imgur](http://i.imgur.com/nfCykkw.png)](http://i.imgur.com/nfCykkw.png)
-[![Imgur](http://i.imgur.com/btje2Hf.png)](http://i.imgur.com/btje2Hf.png)
-[![Imgur](http://i.imgur.com/uvPVIsY.png)](http://i.imgur.com/uvPVIsY.png)
-[![Imgur](http://i.imgur.com/36tgqLo.png)](http://i.imgur.com/36tgqLo.png)
-[![Imgur](http://i.imgur.com/nfCykkw.png)](http://i.imgur.com/nfCykkw.png)
-
 
 <i class="icon-download"></i> Installation
 -------------
