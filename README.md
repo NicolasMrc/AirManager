@@ -58,11 +58,11 @@ Le point de départ de l'application est l'interface de login, puis l'utilisateu
 <i class="icon-picture"></i> Screenshots
 -------------
 
-[Imgur](http://i.imgur.com/wjqEZbC.png)
-[Imgur](http://i.imgur.com/btje2Hf.png)
-[Imgur](http://i.imgur.com/uvPVIsY.png)
-[Imgur](http://i.imgur.com/36tgqLo.png)
-[Imgur](http://i.imgur.com/nfCykkw.png)
+[![Imgur](http://i.imgur.com/nfCykkw.png)](http://i.imgur.com/nfCykkw.png)
+[![Imgur](http://i.imgur.com/btje2Hf.png)](http://i.imgur.com/btje2Hf.png)
+[![Imgur](http://i.imgur.com/uvPVIsY.png)](http://i.imgur.com/uvPVIsY.png)
+[![Imgur](http://i.imgur.com/36tgqLo.png)](http://i.imgur.com/36tgqLo.png)
+[![Imgur](http://i.imgur.com/nfCykkw.png)](http://i.imgur.com/nfCykkw.png)
 
 
 <i class="icon-download"></i> Installation
