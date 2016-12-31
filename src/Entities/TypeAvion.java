@@ -1,10 +1,12 @@
 package Entities;
 
+import java.io.Serializable;
+
 /**
  * Entite Type avion
  * Created by Nico on 28/11/2016.
  */
-public class TypeAvion {
+public class TypeAvion implements Serializable {
 
     /**
      * id du type avion

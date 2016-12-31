@@ -25,18 +25,17 @@ public class EquipageService {
     public void addPNC(Integer idEquipage, Integer idPNC){
         if(idEquipage != null || idPNC != null){
             Equipage equipage = this.equipageRepository.findOneById(idEquipage);
-            if (equipage != null && equipage.getPncs()!= null && !equipage.getPncs().isEmpty()){
+            if (equipage != null && equipage.getPncs()!= null && !equipage.getPncs().isEmpty() ){
                 boolean alreadyAdded = false;
                 for(MembreEquipage membreEquipage : equipage.getPncs()){
                     if(membreEquipage.getId() == idPNC){
                         alreadyAdded = true;
                     }
                 }
-                //TODO check atMax atMin
                 if(!alreadyAdded){
                     this.equipageRepository.addPNC(idEquipage, idPNC);
                     try {
-                        equipage.getPncs().add((PNC)this.membreEquipageService.findOneById(idPNC));
+                        equipage.addPnc((PNC)this.membreEquipageService.findOneById(idPNC));
                     } catch (Exception e){
                         System.out.println(e.getMessage());
                     }

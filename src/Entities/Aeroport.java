@@ -1,10 +1,12 @@
 package Entities;
 
+import java.io.Serializable;
+
 /**
  * Entite Aeroport
  * Created by Nico on 12/12/2016.
  */
-public class Aeroport {
+public class Aeroport implements Serializable {
 
     /**
      * id de l'aeroport

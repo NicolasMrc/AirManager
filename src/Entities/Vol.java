@@ -2,13 +2,14 @@ package Entities;
 
 import Exceptions.EquipageException;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * entite Vol
  * Created by Nico on 28/11/2016.
  */
-public class Vol {
+public class Vol implements Serializable{
 
     //TODO utiliser les classe non utilisée
 

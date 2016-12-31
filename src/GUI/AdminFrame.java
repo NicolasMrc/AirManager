@@ -422,42 +422,36 @@ public class AdminFrame extends JFrame{
 
                 ArrayList<TypeAvion> typesAvions = this.typeAvionService.findAll();
 
-                //TODO reword ca parce que ca peut etre mieux
                 this.qualificationTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
                     public void valueChanged(ListSelectionEvent event) {
-                        try{
-                            int idMembreSelectionne = (Integer)qualificationTable.getValueAt(qualificationTable.getSelectedRow(), 0);
-                            MembreEquipage membreSelectionne =  membreEquipageService.findOneById(idMembreSelectionne);
+                        int idMembreSelectionne = (Integer)qualificationTable.getValueAt(qualificationTable.getSelectedRow(), 0);
 
-                            qualification1Combo.removeAllItems();
-                            qualification2Combo.removeAllItems();
+                        MembreEquipage membreSelectionne = membreEquipageService.findOneById(idMembreSelectionne);
 
-                            qualification1Combo.addItem(null);
-                            qualification2Combo.addItem(null);
+                        qualification1Combo.removeAllItems();
+                        qualification2Combo.removeAllItems();
 
-                            for(TypeAvion typeAvion : typesAvions){
+                        qualification1Combo.addItem(null);
+                        qualification2Combo.addItem(null);
 
-                                ComboItem combo1Item = new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId()));
-                                ComboItem combo2Item = new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId()));
+                        for(TypeAvion typeAvion : typesAvions){
 
-                                qualification1Combo.addItem(combo1Item);
-                                qualification2Combo.addItem(combo2Item);
+                            ComboItem combo1Item = new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId()));
+                            ComboItem combo2Item = new ComboItem(typeAvion.getNom(), String.valueOf(typeAvion.getId()));
 
-                                if (membreSelectionne.getQualifications().size() >= 1 && membreSelectionne.getQualifications().get(0) != null) {
-                                    if(membreSelectionne.getQualifications().get(0).getNom().equals(typeAvion.getNom())){
-                                        qualification1Combo.setSelectedItem(combo1Item);
-                                    }
-                                }
-                                if (membreSelectionne.getQualifications().size() >= 2 && membreSelectionne.getQualifications().get(1) != null) {
-                                    if(membreSelectionne.getQualifications().get(1).getNom().equals(typeAvion.getNom())){
-                                        qualification2Combo.setSelectedItem(combo2Item);
-                                    }
+                            qualification1Combo.addItem(combo1Item);
+                            qualification2Combo.addItem(combo2Item);
+
+                            if (membreSelectionne.getQualifications().size() >= 1 && membreSelectionne.getQualifications().get(0) != null) {
+                                if(membreSelectionne.getQualifications().get(0).getNom().equals(typeAvion.getNom())){
+                                    qualification1Combo.setSelectedItem(combo1Item);
                                 }
                             }
-
-
-                        } catch (EmptyFieldException e){
-                            System.out.println(e.getMessage());
+                            if (membreSelectionne.getQualifications().size() >= 2 && membreSelectionne.getQualifications().get(1) != null) {
+                                if(membreSelectionne.getQualifications().get(1).getNom().equals(typeAvion.getNom())){
+                                    qualification2Combo.setSelectedItem(combo2Item);
+                                }
+                            }
                         }
                     }
                 });

@@ -1,6 +1,6 @@
 package GUI;
 
-import Entities.MembreEquipage;
+import Entities.PNC;
 import Entities.Utilisateur;
 import Entities.Vol;
 import Services.UtilisateurService;
@@ -14,7 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.*;
 import java.util.ArrayList;
+
 
 /**
  * classe de l'interface graphique des membre d'equipage
@@ -39,6 +41,8 @@ public class MembreEquipageGui extends JFrame{
     private JPasswordField oldPasswordField;
     private JButton sauvegarderButton;
     private JPasswordField newPasswordField;
+    private JButton exporterButton;
+    private JButton serialiseButton;
 
     /**
      * le service de vol
@@ -116,6 +120,31 @@ public class MembreEquipageGui extends JFrame{
                     newPasswordField.setText("");
                     setSize(new Dimension(800, 550));
                 }
+            }
+        });
+
+        serialiseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Vol> vols = volService.findAllByMembreEquipage(utilisateurCourant.getIdMembre());
+                try {
+                    FileOutputStream fileOutputStream = new FileOutputStream("tmp/vol.txt");
+                    for(Vol vol : vols) {
+                        ObjectOutputStream out = new ObjectOutputStream(fileOutputStream);
+                        out.writeObject(vol);
+                    }
+                    JOptionPane.showMessageDialog(cardPanel, "les vols ont été serialisé dans le fichier tmp/vols.txt", "Succes !", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(cardPanel, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        exporterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Vol> vols = volService.findAllByMembreEquipage(utilisateurCourant.getIdMembre());
+                createTable(vols);
             }
         });
     }
@@ -251,5 +280,77 @@ public class MembreEquipageGui extends JFrame{
         UtilisateurService utilisateurService = new UtilisateurService();
         Utilisateur utilisateur = utilisateurService.connexion("Boucher", "password", TypeUtilisateur.MEMBRE_EQUIPAGE);
         MembreEquipageGui membreEquipageGui = new MembreEquipageGui(utilisateur);
+    }
+
+
+    public void createTable(ArrayList<Vol> vols){
+
+
+        String body = "<div class='container'> "+
+                "<div class='row'>" +
+                "<div class='col-xs-12'>" +
+                "<h1 class='title'>Vols</h1>" +
+                "</div>" +
+                "</div>" +
+                "<div class='row'>" +
+                "<div class='col-xs-12'>" +
+                "<div class='table-div'>" +
+                "<table class='table'>" +
+                        "<tr>" +
+                            "<th>Numéro de vol</th>" +
+                            "<th>Site</th>" +
+                            "<th>Destination</th>" +
+                            "<th>Date</th>" +
+                            "<th>Avion</th>" +
+                            "<th>Pilote</th>" +
+                            "<th>Copilote</th>" +
+                            "<th>PNCs</th>" +
+                        "</tr>";
+
+        for (Vol vol : vols){
+            body += "<tr>" +
+                    "<td>" + vol.getNumero() + "</th>" +
+                    "<td>" + vol.getSite().getCode() + " - " + vol.getSite().getNom() + "</th>" +
+                    "<td>" + vol.getDestination().getCode() + " - " + vol.getDestination().getNom() +"</th>" +
+                    "<td>" + vol.getDate() + "</th>" +
+                    "<td>" + vol.getAvion().getRef() + "</th>" +
+                    "<td>" + vol.getEquipage().getPilote().getPrenom() + " " + vol.getEquipage().getPilote().getNom() + "</th>" +
+                    "<td>" + vol.getEquipage().getCopilote().getPrenom() + " " + vol.getEquipage().getCopilote().getNom() + "</th> <td>";
+
+            for(PNC pnc : vol.getEquipage().getPncs()){
+                body += pnc.getPrenom() + " " + pnc.getNom() + " ";
+            }
+
+            body += "</td></tr></div></div></div></div>";
+        }
+
+
+        String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \n" +
+                "\"http://www.w3.org/TR/html4/loose.dtd\">\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.min.css\">\n"+
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n"+
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" +
+                "<title>Tableau de vols</title>\n" +
+                "</head>\n" +
+                "<body> "+ body +"\n" +
+                "</body>\n" +
+                "</html>";
+
+        try {
+            FileWriter fstream = new FileWriter("tmp/vol_"+ utilisateurCourant.getUsername() +".html");
+            BufferedWriter out = new BufferedWriter(fstream);
+            out.write(html);
+            out.close();
+
+            File htmlFile = new File("tmp/vol_"+ utilisateurCourant.getUsername() +".html");
+            Desktop.getDesktop().browse(htmlFile.toURI());
+
+            JOptionPane.showMessageDialog(cardPanel, "les vols ont été sauvegardé dans le fichier tmp/vols_"+ utilisateurCourant.getUsername() +".html", "Succes !", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(cardPanel, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 }

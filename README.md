@@ -38,7 +38,8 @@ Un certain nombre de consignes ont été specifiée dans le sujet, vous les trou
 Deux types de persistances sont employées dans l'application : 
 
 - Toutes les données de l'application sont sauvegardées automatiquement en **base de donnée** lors de chaque modification sur une entitée.
-- Les membres d'équipages peuvent exporter sous forme d'un fichier texte le tableau des vols sur lesquels il sont assignés grâce a la **serialization**.
+- Les membres peuvent exporter dans un fichier le tableau des vols grâce a la **serialization** (on peut imaginer que d'implementer plus tard une fonctionnalité d'importation a partir de fichier serialiser grace a ce mechanimse)'.
+- Les membres d'equipage peuvent exporter les vols sur lesquels ils sont assigné, cela créer un fichier html souvrant dans le navigateur de l'utilisateur contenant un tableau de vol
 
 #### <i class="icon-refresh"></i> **Interface Graphique**
 
@@ -56,6 +57,12 @@ Le point de départ de l'application est l'interface de login, puis l'utilisateu
 
 <i class="icon-picture"></i> Screenshots
 -------------
+
+[Imgur](http://i.imgur.com/wjqEZbC.png)
+[Imgur](http://i.imgur.com/btje2Hf.png)
+[Imgur](http://i.imgur.com/uvPVIsY.png)
+[Imgur](http://i.imgur.com/36tgqLo.png)
+[Imgur](http://i.imgur.com/nfCykkw.png)
 
 
 <i class="icon-download"></i> Installation
@@ -95,3 +102,15 @@ executer le main présent dans le fichier <kbd>DataDB.java</kbd>
  - Administrateur : nom d'utilisateur : "*admin*", mot de passe "*admin*".
  - Manager : nom d'utilisateur : "*manager*", mot de passe "*manager*".
  - Utilisateur : nom d'utilisateur : *nom de famille*, mot de passe : "*password*".
+ 
+ 
+ 
+ TODO
+ -------------
+ 
+ Voici la listes des éléments qu'il reste a développer et à ameliorer :
+ 
+ - Rework de l'interface Administration (pour appliquer les meme style et layout que les autres interface qui sont plus optimisées due aux connaissance prise au cours du développement du projet)
+ - Utilisation de champs date avec date picker (pour l'instant juste des string poour les dates)
+ - Fonction d'import de vol par fichier pour l'admin
+ 

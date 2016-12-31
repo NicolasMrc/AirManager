@@ -2,6 +2,7 @@ package Entities;
 
 import Exceptions.QualificationException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import Enum.TypeMembreEquipage;
 
@@ -9,7 +10,7 @@ import Enum.TypeMembreEquipage;
  * Classe abstraite de mempre d'equipage
  * Created by Nico on 28/11/2016.
  */
-public abstract class MembreEquipage {
+public abstract class MembreEquipage implements Serializable {
 
     /**
      * l'id du membre d'equipage

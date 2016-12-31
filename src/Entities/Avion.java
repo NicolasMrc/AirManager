@@ -1,10 +1,12 @@
 package Entities;
 
+import java.io.Serializable;
+
 /**
  * Entite Avion
  * Created by Nico on 28/11/2016.
  */
-public class Avion {
+public class Avion implements Serializable {
     /**
      * l'id
      */

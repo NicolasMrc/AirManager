@@ -88,7 +88,7 @@ public class ManagerGUI extends JFrame{
         this.setSize(new Dimension(800, 570));
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        this.setTitle("Portail membre");
+        this.setTitle("Portail Manager");
         this.setContentPane(this.mainPanel);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

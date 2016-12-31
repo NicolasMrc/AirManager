@@ -2,13 +2,14 @@ package Entities;
 
 import Exceptions.EquipageException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Entite Equipage
  * Created by Nico on 28/11/2016.
  */
-public class Equipage {
+public class Equipage implements Serializable {
 
     /**
      * l'id
@@ -39,8 +40,6 @@ public class Equipage {
      * la liste de pnc de l'equipage
      */
     private ArrayList<PNC> pncs;
-
-    //TODO utiliser atMin et atMax
 
     /**
      * constructeur
@@ -121,7 +120,7 @@ public class Equipage {
      * @throws EquipageException
      *      si l'equipage est au complet
      */
-    public void addPncs(PNC pnc) throws EquipageException{
+    public void addPnc(PNC pnc) throws EquipageException{
         if(!this.atMax) {
             this.pncs.add(pnc);
         } else {
